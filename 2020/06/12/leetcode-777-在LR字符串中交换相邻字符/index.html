@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>leetcode 777. 在LR字符串中交换相邻字符 | zhanzq的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目描述：在一个由 &#39;L&#39; , &#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如&quot;RXXLRXRXL&quot;）中进行移动操作。一次移动操作指用一个”LX”替换一个&quot;XL&quot;，或者用一个&quot;XR&quot;替换一个&quot;RX&quot;。现给定起始字符串start和结束字符串end，请编写代码，当且仅当存在一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode 777. 在LR字符串中交换相邻字符">
+<meta property="og:url" content="https://github.com/zhanzq/zhanzq.github.io/2020/06/12/leetcode-777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="zhanzq的个人博客">
+<meta property="og:description" content="题目描述：在一个由 &#39;L&#39; , &#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如&quot;RXXLRXRXL&quot;）中进行移动操作。一次移动操作指用一个”LX”替换一个&quot;XL&quot;，或者用一个&quot;XR&quot;替换一个&quot;RX&quot;。现给定起始字符串start和结束字符串end，请编写代码，当且仅当存在一">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-06-12T01:28:23.000Z">
+<meta property="article:modified_time" content="2020-06-12T01:34:18.773Z">
+<meta property="article:author" content="zhanzq">
+<meta property="article:tag" content="字符串">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="zhanzq的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">zhanzq的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/zhanzq/zhanzq.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-leetcode-777-在LR字符串中交换相邻字符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/12/leetcode-777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/" class="article-date">
+  <time datetime="2020-06-12T01:28:23.000Z" itemprop="datePublished">2020-06-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      leetcode 777. 在LR字符串中交换相邻字符
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在一个由 <code>&#39;L&#39;</code> , <code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code> 三个字符组成的字符串（例如<code>&quot;RXXLRXRXL&quot;</code>）中进行移动操作。一次移动操作指用一个”LX”替换一个<code>&quot;XL&quot;</code>，或者用一个<code>&quot;XR&quot;</code>替换一个<code>&quot;RX&quot;</code>。现给定起始字符串<code>start</code>和结束字符串<code>end</code>，请编写代码，当且仅当存在一系列移动操作使得<code>start</code>可以转换成<code>end</code>时， 返回<code>True</code>。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例 :"></a>示例 :</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: start &#x3D; &quot;RXXLRXRXL&quot;, end &#x3D; &quot;XRLXXRRLX&quot;</span><br><span class="line">输出: True</span><br><span class="line">解释:</span><br><span class="line">    我们可以通过以下几步将start转换成end:</span><br><span class="line">    RXXLRXRXL -&gt;</span><br><span class="line">    XRXLRXRXL -&gt;</span><br><span class="line">    XRLXRXRXL -&gt;</span><br><span class="line">    XRLXXRRXL -&gt;</span><br><span class="line">    XRLXXRRLX</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><p><code>1 &lt;= len(start) = len(end) &lt;= 10000</code>。</p>
+</li>
+<li><p><code>start</code>和<code>end</code>中的字符串仅限于<code>&#39;L&#39;</code>,<code>&#39;R&#39;</code>和<code>&#39;X&#39;</code>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;char, int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">parse</span><span class="params">(<span class="built_in">string</span> &amp; s, <span class="built_in">vector</span>&lt;PR&gt; &amp;lst)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sz = s.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">'R'</span>)&#123;</span><br><span class="line">                lst.push_back(&#123;<span class="string">'R'</span>, i&#125;);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s[i] == <span class="string">'L'</span>)&#123;</span><br><span class="line">                lst.push_back(&#123;<span class="string">'L'</span>, i&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canTransform</span><span class="params">(<span class="built_in">string</span> start, <span class="built_in">string</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst1, lst2;</span><br><span class="line">        parse(start, lst1);</span><br><span class="line">        parse(end, lst2);</span><br><span class="line">        <span class="comment">// start[R] &lt;= end[R] &amp; start[L] &gt;= end[L]</span></span><br><span class="line">        <span class="comment">// &amp; RL keeps the same sequence</span></span><br><span class="line">        <span class="keyword">int</span> sz = lst1.size();</span><br><span class="line">        <span class="keyword">if</span>(sz != lst2.size())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">                <span class="keyword">char</span> ch = lst1[i].first;</span><br><span class="line">                <span class="keyword">if</span>(ch != lst2[i].first)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(ch == <span class="string">'R'</span>)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(lst1[i].second &gt; lst2[i].second)&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">if</span>(lst1[i].second &lt; lst2[i].second)&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/12/leetcode-777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/" data-id="ckbbjgodx0000cdxxgmmy9fx5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/10/leetcode-457-%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">leetcode 457. 环形数组循环</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E6%94%BB%E7%95%A5/">开发攻略</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" rel="tag">Hexo使用说明</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">个人博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF/" rel="tag">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8E%92/" rel="tag">快排</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97/" rel="tag">数字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" style="font-size: 10px;">Hexo使用说明</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">个人博客搭建</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">循环</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 10px;">快排</a> <a href="/tags/%E6%95%B0%E5%AD%97/" style="font-size: 10px;">数字</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/12/leetcode-777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/">leetcode 777. 在LR字符串中交换相邻字符</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/10/leetcode-457-%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/">leetcode 457. 环形数组循环</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/10/leetcode-556-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-III/">leetcode 556. 下一个更大元素 III</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhanzq<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
