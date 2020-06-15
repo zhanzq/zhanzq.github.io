@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-06-14T14:54:08.899Z</updated>
+  <updated>2020-06-15T21:32:56.422Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一维卷积</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/</id>
+    <published>2020-06-15T21:20:39.000Z</published>
+    <updated>2020-06-15T21:32:56.422Z</updated>
+    
+    <content type="html"><![CDATA[<p>一维卷积通常有三种类型：full卷积、same卷积和valid卷积，下面以一个长度为5的一维张量I和长度为3的一维张量K（卷积核）为例，介绍这三种卷积的计算过程</p><img src="/images/conv.png" width="60%" /> <h3 id="一维Full卷积"><a href="#一维Full卷积" class="headerlink" title="一维Full卷积"></a>一维Full卷积</h3><p>Full卷积的计算过程是：K沿着I顺序移动，每移动到一个固定位置，对应位置的值相乘再求和，计算过程如下：</p><img src="/images/full_conv.png" width="60%" /> <p>将得到的值依次存入一维张量Cfull，该张量就是I和卷积核K的full卷积结果，其中K卷积核或者滤波器或者卷积掩码，卷积符号用符号★表示，记Cfull=I★K</p><img src="/images/full_conv_res.png" width="60%" />  <h3 id="一维Same卷积"><a href="#一维Same卷积" class="headerlink" title="一维Same卷积"></a>一维Same卷积</h3><img src="/images/same_conv0.png" width="60%" /> <p>卷积核K都有一个锚点，然后将锚点顺序移动到张量I的每一个位置处，对应位置相乘再求和，计算过程如下：</p><img src="/images/same_conv.png" width="60%" />  <img src="/images/same_conv_res.png" width="60%" /> <p>假设卷积核的长度为FL，如果FL为奇数，锚点位置在(FL-1)/2处；如果FL为偶数，锚点位置在(FL-2)/2处。 </p><h3 id="一维Valid卷积"><a href="#一维Valid卷积" class="headerlink" title="一维Valid卷积"></a>一维Valid卷积</h3><p> 从full卷积的计算过程可知，如果K靠近I，就会有部分延伸到I之外，valid卷积只考虑I能完全覆盖K的情况，即K在I的内部移动的情况，计算过程如下：</p> <img src="/images/valid_conv.png" width="60%" />  <img src="/images/valid_conv_res.png" width="60%" /> <h3 id="三种卷积类型的关系"><a href="#三种卷积类型的关系" class="headerlink" title="三种卷积类型的关系"></a>三种卷积类型的关系</h3><img src="/images/conv_relation.png" width="60%" /> ]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一维卷积通常有三种类型：full卷积、same卷积和valid卷积，下面以一个长度为5的一维张量I和长度为3的一维张量K（卷积核）为例，介绍这三种卷积的计算过程&lt;/p&gt;
+&lt;img src=&quot;/images/conv.png&quot; width=&quot;60%&quot; /&gt; 
+
+&lt;h3 id=
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="卷积" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%8D%B7%E7%A7%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode 368. 最大整除子集</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/15/leetcode-368-%E6%9C%80%E5%A4%A7%E6%95%B4%E9%99%A4%E5%AD%90%E9%9B%86/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/15/leetcode-368-%E6%9C%80%E5%A4%A7%E6%95%B4%E9%99%A4%E5%AD%90%E9%9B%86/</id>
+    <published>2020-06-15T05:14:55.000Z</published>
+    <updated>2020-06-15T05:18:34.834Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给出一个由<strong>无重复</strong>的正整数组成的集合，找出其中最大的整除子集，子集中任意一对 (Si，Sj) 都要满足：Si % Sj = 0 或 Sj % Si = 0。</p><p>如果有多个目标子集，返回其中任何一个均可。</p><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2] (当然, [1,3] 也正确)</span><br></pre></td></tr></table></figure><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,4,8]</span><br><span class="line">输出: [1,2,4,8]</span><br></pre></td></tr></table></figure><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">largestDivisibleSubset</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.empty())&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; lst;</span><br><span class="line">        lst.push_back(&#123;<span class="number">1</span>&#125;);</span><br><span class="line">        <span class="keyword">int</span> sz = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">int</span> i = sz<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> v : lst[i])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(num % v == <span class="number">0</span>)&#123;</span><br><span class="line">                        found = <span class="literal">true</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(found)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i == sz<span class="number">-1</span>)&#123;</span><br><span class="line">                sz++;</span><br><span class="line">                lst.push_back(&#123;num&#125;);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                lst[i+<span class="number">1</span>].push_back(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;sz&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">int</span> pre = lst[sz<span class="number">-1</span>].back();</span><br><span class="line">        res.push_back(pre);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sz<span class="number">-2</span>; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> v : lst[i])&#123;</span><br><span class="line">                <span class="keyword">if</span>(pre%v == <span class="number">0</span>)&#123;</span><br><span class="line">                    res.push_back(v);</span><br><span class="line">                    pre = v;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给出一个由&lt;strong&gt;无重复&lt;/strong&gt;的正整数组成的集合，找出其中最大的整除子集，子集中任意一对 (Si
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="排序" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="集合" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E9%9B%86%E5%90%88/"/>
+    
+      <category term="整除" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B4%E9%99%A4/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 1424. 对角线遍历 II</title>
