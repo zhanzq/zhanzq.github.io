@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-06-15T21:37:25.968Z</updated>
+  <updated>2020-06-15T22:06:25.379Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -21,18 +21,18 @@
     <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/"/>
     <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/</id>
     <published>2020-06-15T21:20:39.000Z</published>
-    <updated>2020-06-15T21:37:25.968Z</updated>
+    <updated>2020-06-15T22:06:25.379Z</updated>
     
-    <content type="html"><![CDATA[<p>一维卷积通常有三种类型：full卷积、same卷积和valid卷积，下面以一个长度为5的一维张量I和长度为3的一维张量K（卷积核）为例，介绍这三种卷积的计算过程</p><img src="images/conv.png" width="60%" /> <h3 id="一维Full卷积"><a href="#一维Full卷积" class="headerlink" title="一维Full卷积"></a>一维Full卷积</h3><p>Full卷积的计算过程是：K沿着I顺序移动，每移动到一个固定位置，对应位置的值相乘再求和，计算过程如下：</p><img src="images/full_conv.png" width="60%" /> <p>将得到的值依次存入一维张量Cfull，该张量就是I和卷积核K的full卷积结果，其中K卷积核或者滤波器或者卷积掩码，卷积符号用符号★表示，记Cfull=I★K</p><img src="images/full_conv_res.png" width="60%" />  <h3 id="一维Same卷积"><a href="#一维Same卷积" class="headerlink" title="一维Same卷积"></a>一维Same卷积</h3><img src="/images/same_conv0.png" width="30%" /> <p>卷积核K都有一个锚点，然后将锚点顺序移动到张量I的每一个位置处，对应位置相乘再求和，计算过程如下：</p><img src="/images/same_conv.png" width="60%" />  <img src="/images/same_conv_res.png" width="50%" /> <p>假设卷积核的长度为FL，如果FL为奇数，锚点位置在(FL-1)/2处；如果FL为偶数，锚点位置在(FL-2)/2处。 </p><h3 id="一维Valid卷积"><a href="#一维Valid卷积" class="headerlink" title="一维Valid卷积"></a>一维Valid卷积</h3><p> 从full卷积的计算过程可知，如果K靠近I，就会有部分延伸到I之外，valid卷积只考虑I能完全覆盖K的情况，即K在I的内部移动的情况，计算过程如下：</p> <img src="/images/valid_conv.png" width="40%" />  <img src="/images/valid_conv_res.png" width="60%" /> <h3 id="三种卷积类型的关系"><a href="#三种卷积类型的关系" class="headerlink" title="三种卷积类型的关系"></a>三种卷积类型的关系</h3><img src="/images/conv_relation.png" width="60%" /> ]]></content>
+    <content type="html"><![CDATA[<p>一维卷积通常有三种类型：full卷积、same卷积和valid卷积，下面以一个长度为5的一维张量I和长度为3的一维张量K（卷积核）为例，介绍这三种卷积的计算过程</p><img src="../images/conv.png" width="40%" /> <h3 id="一维Full卷积"><a href="#一维Full卷积" class="headerlink" title="一维Full卷积"></a>一维Full卷积</h3><p>Full卷积的计算过程是：K沿着I顺序移动，每移动到一个固定位置，对应位置的值相乘再求和，计算过程如下：</p><img src="../images/full_conv.png" width="80%" /> <p>将得到的值依次存入一维张量Cfull，该张量就是I和卷积核K的full卷积结果，其中K卷积核或者滤波器或者卷积掩码，卷积符号用符号★表示，记Cfull=I★K</p><img src="../images/full_conv_res.png" width="50%" />  <h3 id="一维Same卷积"><a href="#一维Same卷积" class="headerlink" title="一维Same卷积"></a>一维Same卷积</h3><img src="../images/same_conv0.png" width="30%" /> <p>卷积核K都有一个锚点，然后将锚点顺序移动到张量I的每一个位置处，对应位置相乘再求和，计算过程如下：</p><img src="../images/same_conv.png" width="60%" />  <img src="../images/same_conv_res.png" width="50%" /> <p>假设卷积核的长度为FL，如果FL为奇数，锚点位置在(FL-1)/2处；如果FL为偶数，锚点位置在(FL-2)/2处。 </p><h3 id="一维Valid卷积"><a href="#一维Valid卷积" class="headerlink" title="一维Valid卷积"></a>一维Valid卷积</h3><p> 从full卷积的计算过程可知，如果K靠近I，就会有部分延伸到I之外，valid卷积只考虑I能完全覆盖K的情况，即K在I的内部移动的情况，计算过程如下：</p> <img src="../images/valid_conv.png" width="35%" />  <img src="../images/valid_conv_res.png" width="50%" /> <h3 id="三种卷积类型的关系"><a href="#三种卷积类型的关系" class="headerlink" title="三种卷积类型的关系"></a>三种卷积类型的关系</h3><img src="../images/conv_relation.png" width="80%" /> ]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;一维卷积通常有三种类型：full卷积、same卷积和valid卷积，下面以一个长度为5的一维张量I和长度为3的一维张量K（卷积核）为例，介绍这三种卷积的计算过程&lt;/p&gt;
-&lt;img src=&quot;images/conv.png&quot; width=&quot;60%&quot; /&gt; 
+&lt;img src=&quot;../images/conv.png&quot; width=&quot;40%&quot; /&gt; 
 
-&lt;h3 id=&quot;
+&lt;h3 i
       
     
     </summary>
