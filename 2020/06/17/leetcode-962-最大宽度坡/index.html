@@ -5,21 +5,20 @@
   
 
   
-  <title>leetcode 825. 适龄的朋友 | zhanzq的个人博客</title>
+  <title>leetcode 962. 最大宽度坡 | zhanzq的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目描述：人们会互相发送好友请求，现在给定一个包含有他们年龄的数组，ages[i] 表示第 i 个人的年龄。 当满足以下条件时，A 不能给 B（A、B不为同一人）发送好友请求：  age[B] &lt;&#x3D; 0.5 * age[A] + 7 age[B] &gt; age[A] age[B] &gt; 100 &amp;&amp; age[A] &lt; 100否则，A 可以给 B 发送好友请求。">
+  <meta name="description" content="题目描述：给定一个整数数组 A，坡是元组 (i, j)，其中 i &lt; j 且 A[i] &lt;&#x3D; A[j]。这样的坡的宽度为 j - i。 找出 A 中的坡的最大宽度，如果不存在，返回 0 。 示例 1：1234输入：[6,0,8,2,1,5]输出：4解释：	最大宽度的坡为 (i, j) &#x3D; (1, 5): A[1] &#x3D; 0 且 A[5] &#x3D; 5.  示例 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 825. 适龄的朋友">
-<meta property="og:url" content="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-825-%E9%80%82%E9%BE%84%E7%9A%84%E6%9C%8B%E5%8F%8B/index.html">
+<meta property="og:title" content="leetcode 962. 最大宽度坡">
+<meta property="og:url" content="https://github.com/zhanzq/zhanzq.github.io/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/index.html">
 <meta property="og:site_name" content="zhanzq的个人博客">
-<meta property="og:description" content="题目描述：人们会互相发送好友请求，现在给定一个包含有他们年龄的数组，ages[i] 表示第 i 个人的年龄。 当满足以下条件时，A 不能给 B（A、B不为同一人）发送好友请求：  age[B] &lt;&#x3D; 0.5 * age[A] + 7 age[B] &gt; age[A] age[B] &gt; 100 &amp;&amp; age[A] &lt; 100否则，A 可以给 B 发送好友请求。">
+<meta property="og:description" content="题目描述：给定一个整数数组 A，坡是元组 (i, j)，其中 i &lt; j 且 A[i] &lt;&#x3D; A[j]。这样的坡的宽度为 j - i。 找出 A 中的坡的最大宽度，如果不存在，返回 0 。 示例 1：1234输入：[6,0,8,2,1,5]输出：4解释：	最大宽度的坡为 (i, j) &#x3D; (1, 5): A[1] &#x3D; 0 且 A[5] &#x3D; 5.  示例 2">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2020-06-13T17:18:53.000Z">
-<meta property="article:modified_time" content="2020-06-13T17:22:13.389Z">
+<meta property="article:published_time" content="2020-06-17T15:02:20.000Z">
+<meta property="article:modified_time" content="2020-06-17T15:06:31.086Z">
 <meta property="article:author" content="zhanzq">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="排序">
-<meta property="article:tag" content="数组">
+<meta property="article:tag" content="二分查找">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zhanzq的个人博客" type="application/atom+xml">
@@ -69,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode-825-适龄的朋友" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode-962-最大宽度坡" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/06/14/leetcode-825-%E9%80%82%E9%BE%84%E7%9A%84%E6%9C%8B%E5%8F%8B/" class="article-date">
-  <time datetime="2020-06-13T17:18:53.000Z" itemprop="datePublished">2020-06-14</time>
+    <a href="/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/" class="article-date">
+  <time datetime="2020-06-17T15:02:20.000Z" itemprop="datePublished">2020-06-17</time>
 </a>
     
   <div class="article-category">
@@ -87,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode 825. 适龄的朋友
+      leetcode 962. 最大宽度坡
     </h1>
   
 
@@ -95,37 +94,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>人们会互相发送好友请求，现在给定一个包含有他们年龄的数组，<code>ages[i]</code> 表示第 i 个人的年龄。</p>
-<p>当满足以下条件时，A 不能给 B（A、B不为同一人）发送好友请求：</p>
-<ul>
-<li><code>age[B] &lt;= 0.5 * age[A] + 7</code></li>
-<li><code>age[B] &gt; age[A]</code></li>
-<li><code>age[B] &gt; 100 &amp;&amp; age[A] &lt; 100</code><br>否则，A 可以给 B 发送好友请求。</li>
-</ul>
-<p>注意如果 A 向 B 发出了请求，不等于 B 也一定会向 A 发出请求。而且，人们不会给自己发送好友请求。 </p>
-<p>求总共会发出多少份好友请求?</p>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [16,16]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 二人可以互发好友申请。</span><br></pre></td></tr></table></figure>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [16,17,18]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 好友请求可产生于 17 -&gt; 16, 18 -&gt; 17.</span><br></pre></td></tr></table></figure>
-<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [20,30,100,110,120]</span><br><span class="line">输出: 3</span><br><span class="line">解释: 好友请求可产生于 110 -&gt; 100, 120 -&gt; 110, 120 -&gt; 100.</span><br></pre></td></tr></table></figure>
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个整数数组 <code>A</code>，坡是元组 <code>(i, j)</code>，其中 <code>i &lt; j</code> 且 <code>A[i] &lt;= A[j]</code>。这样的坡的宽度为 <code>j - i</code>。</p>
+<p>找出 <code>A</code> 中的坡的最大宽度，如果不存在，返回 0 。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[6,0,8,2,1,5]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">	最大宽度的坡为 (i, j) &#x3D; (1, 5): A[1] &#x3D; 0 且 A[5] &#x3D; 5.</span><br></pre></td></tr></table></figure>
 
-<p><strong>说明:</strong></p>
-<ul>
-<li>1 &lt;= ages.length &lt;= 20000.</li>
-<li>1 &lt;= ages[i] &lt;= 120.</li>
-</ul>
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[9,8,1,0,1,9,4,0,4,1]</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">	最大宽度的坡为 (i, j) &#x3D; (2, 9): A[2] &#x3D; 1 且 A[9] &#x3D; 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li>2 &lt;= A.length &lt;= 50000</li>
+<li>0 &lt;= A[i] &lt;= 50000</li>
+</ol>
 <hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numFriendRequests</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ages)</span> </span>&#123;</span><br><span class="line">        sort(ages.begin(), ages.end());</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sz = ages.size();</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            <span class="comment">// ages[i] is age[A]</span></span><br><span class="line">            <span class="comment">// get left </span></span><br><span class="line">            <span class="keyword">int</span> left = <span class="keyword">int</span>(<span class="number">0.5</span>*ages[i] + <span class="number">7</span>);</span><br><span class="line">            <span class="keyword">while</span>(l &lt; sz &amp;&amp; ages[l] &lt;= left)&#123;</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(r &lt; sz &amp;&amp; ages[r] == ages[i])&#123;</span><br><span class="line">                r++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(r - l &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                res += r - l<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;PR&gt; &amp;lst, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = lst.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">            mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(lst[mid].first &gt; val)&#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lst[l].second;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxWidthRamp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst;</span><br><span class="line">        <span class="keyword">int</span> sz = A.size();</span><br><span class="line">        <span class="keyword">int</span> lst_sz = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(lst_sz == <span class="number">0</span> || lst.back().first &gt; A[i])&#123;</span><br><span class="line">                lst.push_back(&#123;A[i], i&#125;);</span><br><span class="line">                lst_sz++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// lst[idx].first &lt; A[i]</span></span><br><span class="line">                <span class="keyword">int</span> idx = binarySearch(lst, A[i]);</span><br><span class="line">                res = max(res, i - idx);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-825-%E9%80%82%E9%BE%84%E7%9A%84%E6%9C%8B%E5%8F%8B/" data-id="ckbf6ytoa000frixx0v6ffix7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/" data-id="ckbjhnjxz00003lxxav9383hq" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li></ul>
 
     </footer>
   </div>
@@ -133,19 +122,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/06/14/leetcode-799-%E9%A6%99%E6%A7%9F%E5%A1%94/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          leetcode 799. 香槟塔
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/06/14/leetcode-397-%E6%95%B4%E6%95%B0%E6%9B%BF%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcode 397. 整数替换</div>
+      <div class="article-nav-title">一维卷积</div>
     </a>
   
 </nav>
