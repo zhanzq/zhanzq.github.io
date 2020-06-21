@@ -64,6 +64,141 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-133-克隆图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/21/leetcode-133-%E5%85%8B%E9%9A%86%E5%9B%BE/" class="article-date">
+  <time datetime="2020-06-21T15:02:12.000Z" itemprop="datePublished">2020-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/21/leetcode-133-%E5%85%8B%E9%9A%86%E5%9B%BE/">leetcode 133. 克隆图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你无向 <a href="https://baike.baidu.com/item/连通图/6460995?fr=aladdin" target="_blank" rel="noopener">连通</a> 图中一个节点的引用，请你返回该图的 <a href="https://baike.baidu.com/item/深拷贝/22785317?fr=aladdin" target="_blank" rel="noopener">深拷贝</a>（克隆）。</p>
+<p>图中的每个节点都包含它的值 <code>val</code>（<code>int</code>） 和其邻居的列表（<code>list[Node]</code>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Node &#123;</span><br><span class="line">    public int val;</span><br><span class="line">    public List&lt;Node&gt; neighbors;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试用例格式：</strong></p>
+<p>简单起见，每个节点的值都和它的索引相同。例如，第一个节点值为 1（<code>val = 1</code>），第二个节点值为 2（<code>val = 2</code>），以此类推。该图在测试用例中使用邻接列表表示。</p>
+<p><strong>邻接列表</strong> 是用于表示有限图的无序列表的集合。每个列表都描述了图中节点的邻居集。</p>
+<p>给定节点将始终是图中的第一个节点（值为 1）。你必须将 <strong>给定节点的拷贝</strong> 作为对克隆图的引用返回。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><img src="../images/133_graph1.png" width="50%" left />
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：adjList &#x3D; [[2,4],[1,3],[2,4],[1,3]]</span><br><span class="line">输出：[[2,4],[1,3],[2,4],[1,3]]</span><br><span class="line">解释：</span><br><span class="line">图中有 4 个节点。</span><br><span class="line">节点 1 的值是 1，它有两个邻居：节点 2 和 4 。</span><br><span class="line">节点 2 的值是 2，它有两个邻居：节点 1 和 3 。</span><br><span class="line">节点 3 的值是 3，它有两个邻居：节点 2 和 4 。</span><br><span class="line">节点 4 的值是 4，它有两个邻居：节点 1 和 3 。</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><img src="../images/133_graph2.png" width="20%" />
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：adjList &#x3D; [[]]</span><br><span class="line">输出：[[]]</span><br><span class="line">解释：输入包含一个空列表。该图仅仅只有一个值为 1 的节点，它没有任何邻居。</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：adjList &#x3D; []</span><br><span class="line">输出：[]</span><br><span class="line">解释：这个图是空的，它不含任何节点。</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><img src="../images/133_graph3.png" width="30%" />
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：adjList &#x3D; [[2],[1]]</span><br><span class="line">输出：[[2],[1]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li>节点数不超过 100 。</li>
+<li>每个节点值 <code>Node.val</code> 都是唯一的，<code>1 &lt;= Node.val &lt;= 100</code>。</li>
+<li>无向图是一个<a href="https://baike.baidu.com/item/简单图/1680528?fr=aladdin" target="_blank" rel="noopener">简单图</a>，这意味着图中没有重复的边，也没有自环。</li>
+<li>由于图是无向的，如果节点 p 是节点 q 的邻居，那么节点 q 也必须是节点 p 的邻居。</li>
+<li>图是连通图，你可以从给定节点访问到所有节点。</li>
+</ol>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    vector&lt;Node*&gt; neighbors;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    Node() &#123;</span></span><br><span class="line"><span class="comment">        val = 0;</span></span><br><span class="line"><span class="comment">        neighbors = vector&lt;Node*&gt;();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    Node(int _val) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        neighbors = vector&lt;Node*&gt;();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    Node(int _val, vector&lt;Node*&gt; _neighbors) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        neighbors = _neighbors;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">cloneGraph</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!node)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// copy</span></span><br><span class="line">        <span class="built_in">stack</span>&lt;Node*&gt; stk;</span><br><span class="line">        node-&gt;neighbors.push_back(<span class="keyword">new</span> Node(node-&gt;val));</span><br><span class="line">        node-&gt;neighbors.push_back(<span class="literal">NULL</span>);</span><br><span class="line">        stk.push(node);</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</span><br><span class="line">            Node* cur = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line">            <span class="keyword">int</span> sz = cur-&gt;neighbors.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz<span class="number">-2</span>; i++)&#123;</span><br><span class="line">                Node * nxt = cur-&gt;neighbors[i];</span><br><span class="line">                <span class="keyword">if</span>(nxt-&gt;neighbors.empty() || nxt-&gt;neighbors.back() != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    <span class="comment">// nxt has not been copied</span></span><br><span class="line">                    nxt-&gt;neighbors.push_back(<span class="keyword">new</span> Node(nxt-&gt;val));</span><br><span class="line">                    nxt-&gt;neighbors.push_back(<span class="literal">NULL</span>);</span><br><span class="line">                    stk.push(nxt);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;"has copied the graph!"&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">// make links</span></span><br><span class="line">        stk.push(node);</span><br><span class="line">        node-&gt;neighbors.pop_back(); <span class="comment">// pop NULL</span></span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</span><br><span class="line">            Node* cur = stk.top();</span><br><span class="line">            Node* cur_ = cur-&gt;neighbors.back();</span><br><span class="line">            stk.pop();</span><br><span class="line">            <span class="keyword">int</span> sz = cur-&gt;neighbors.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                Node * nxt = cur-&gt;neighbors[i];</span><br><span class="line">                <span class="keyword">if</span>(nxt-&gt;neighbors.back() == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    <span class="comment">// nxt has not made links</span></span><br><span class="line">                    nxt-&gt;neighbors.pop_back();</span><br><span class="line">                    stk.push(nxt);</span><br><span class="line">                &#125;</span><br><span class="line">                cur_-&gt;neighbors.push_back(nxt-&gt;neighbors.back());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// cout&lt;&lt;"has made links"&lt;&lt;endl;</span></span><br><span class="line">        <span class="comment">// split two graphs</span></span><br><span class="line">        Node* res = node-&gt;neighbors.back();</span><br><span class="line">        node-&gt;neighbors.pop_back();</span><br><span class="line">        node-&gt;neighbors.push_back(<span class="literal">NULL</span>);    <span class="comment">// markup has been split</span></span><br><span class="line">        stk.push(node);</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</span><br><span class="line">            Node* cur = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line">            <span class="keyword">int</span> sz = cur-&gt;neighbors.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                Node * nxt = cur-&gt;neighbors[i];</span><br><span class="line">                <span class="keyword">if</span>(nxt-&gt;neighbors.back() != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    <span class="comment">// nxt has not been split</span></span><br><span class="line">                    nxt-&gt;neighbors.pop_back();</span><br><span class="line">                    nxt-&gt;neighbors.push_back(<span class="literal">NULL</span>);</span><br><span class="line">                    stk.push(nxt);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// cout&lt;&lt;"has split the two graphs"&lt;&lt;endl;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// clean markup to recover the orginal graph</span></span><br><span class="line">        node-&gt;neighbors.pop_back();</span><br><span class="line">        stk.push(node);</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</span><br><span class="line">            Node* cur = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line">            <span class="keyword">for</span>(Node * nxt : cur-&gt;neighbors)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nxt-&gt;neighbors.back() == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    <span class="comment">// nxt has not been split</span></span><br><span class="line">                    nxt-&gt;neighbors.pop_back();</span><br><span class="line">                    stk.push(nxt);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;"has recovered the original graph"&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/21/leetcode-133-%E5%85%8B%E9%9A%86%E5%9B%BE/" data-id="ckbp7qu8d0000s8xxgken6ybo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%8B%E9%9A%86/" rel="tag">克隆</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode-638-大礼包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/21/leetcode-638-%E5%A4%A7%E7%A4%BC%E5%8C%85/" class="article-date">
+  <time datetime="2020-06-21T14:11:15.000Z" itemprop="datePublished">2020-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/21/leetcode-638-%E5%A4%A7%E7%A4%BC%E5%8C%85/">leetcode 638. 大礼包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>在LeetCode商店中， 有许多在售的物品。</p>
+<p>然而，也有一些大礼包，每个大礼包以优惠的价格捆绑销售一组物品。</p>
+<p>现给定每个物品的价格，每个大礼包包含物品的清单，以及待购物品清单。请输出<strong>确切</strong>完成待购清单的最低花费。</p>
+<p>每个大礼包的由一个数组中的一组数据描述，最后一个数字代表大礼包的价格，其他数字分别表示内含的其他种类物品的数量。</p>
+<p>任意大礼包可无限次购买。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,5], [[3,0,5],[1,2,10]], [3,2]</span><br><span class="line">输出: 14</span><br><span class="line">解释: </span><br><span class="line">    有A和B两种物品，价格分别为¥2和¥5。</span><br><span class="line">    大礼包1，你可以以¥5的价格购买3A和0B。</span><br><span class="line">    大礼包2， 你可以以¥10的价格购买1A和2B。</span><br><span class="line">    你需要购买3个A和2个B， 所以你付了¥10购买了1A和2B（大礼包2），以及¥4购买2A。</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,3,4], [[1,1,0,4],[2,2,1,9]], [1,2,1]</span><br><span class="line">输出: 11</span><br><span class="line">解释: </span><br><span class="line">    A，B，C的价格分别为¥2，¥3，¥4.</span><br><span class="line">    你可以用¥4购买1A和1B，也可以用¥9购买2A，2B和1C。</span><br><span class="line">    你需要买1A，2B和1C，所以你付了¥4买了1A和1B（大礼包1），以及¥3购买1B， ¥4购买1C。</span><br><span class="line">    你不可以购买超出待购清单的物品，尽管购买大礼包2更加便宜。</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<ol>
+<li>最多6种物品， 100种大礼包。</li>
+<li>每种物品，你最多只需要购买6个。</li>
+<li>你不可以购买超出待购清单的物品，即使更便宜。</li>
+</ol>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;order, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;needs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = needs.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(order[i] &gt; needs[i])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">buy</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;order, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;needs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = needs.size();</span><br><span class="line">        <span class="keyword">bool</span> res = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            needs[i] -= order[i];</span><br><span class="line">            <span class="keyword">if</span>(needs[i] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                res = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unbuy</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;order, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;needs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = needs.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            needs[i] += order[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shoppingOffers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; price, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; special, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; needs, <span class="keyword">int</span> idx, <span class="keyword">int</span> &amp;res, <span class="keyword">int</span> cur)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = price.size();</span><br><span class="line">        <span class="keyword">if</span>(idx == <span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">                cur += price[i]*needs[i];</span><br><span class="line">            &#125;</span><br><span class="line">            res = min(res, cur);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            shoppingOffers(price, special, needs, idx<span class="number">-1</span>, res, cur);</span><br><span class="line">            <span class="keyword">if</span>(valid(special[idx], needs))&#123;</span><br><span class="line">                <span class="keyword">if</span>(buy(special[idx], needs))&#123;</span><br><span class="line">                    res = min(res, cur + special[idx].back());</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    shoppingOffers(price, special, needs, idx, res, cur + special[idx].back());</span><br><span class="line">                &#125;</span><br><span class="line">                unbuy(special[idx], needs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">shoppingOffers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; price, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; special, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; needs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> m = price.size();</span><br><span class="line">        <span class="keyword">int</span> n = special.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            res += price[i]*needs[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> idx = special.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        shoppingOffers(price, special, needs, idx, res, cur);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/21/leetcode-638-%E5%A4%A7%E7%A4%BC%E5%8C%85/" data-id="ckbp7qu8i0001s8xx9a7k5vug" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-676-实现一个魔法字典" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/21/leetcode-676-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AD%94%E6%B3%95%E5%AD%97%E5%85%B8/" class="article-date">
@@ -519,120 +654,6 @@
 
 
   
-    <article id="post-leetcode-1470-重新排列数组" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/19/leetcode-1470-%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84/" class="article-date">
-  <time datetime="2020-06-18T16:37:11.000Z" itemprop="datePublished">2020-06-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/19/leetcode-1470-%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84/">leetcode 1470. 重新排列数组</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个数组 <code>nums</code> ，数组中有 <code>2n</code> 个元素，按 <code>[x1,x2,...,xn,y1,y2,...,yn]</code> 的格式排列。</p>
-<p>请你将数组按 <code>[x1,y1,x2,y2,...,xn,yn]</code> 格式重新排列，返回重排后的数组。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [2,5,1,3,4,7], n &#x3D; 3</span><br><span class="line">输出：[2,3,5,4,1,7] </span><br><span class="line">解释：</span><br><span class="line">    由于 x1&#x3D;2, x2&#x3D;5, x3&#x3D;1, y1&#x3D;3, y2&#x3D;4, y3&#x3D;7 ，所以答案为 [2,3,5,4,1,7]</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4,4,3,2,1], n &#x3D; 4</span><br><span class="line">输出：[1,4,2,3,3,2,4,1]</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,1,2,2], n &#x3D; 2</span><br><span class="line">输出：[1,2,1,2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 500</code></li>
-<li><code>nums.length == 2n</code></li>
-<li><code>1 &lt;= nums[i] &lt;= 10^3</code></li>
-</ul>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">shuffle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            res.push_back(nums[i]);</span><br><span class="line">            res.push_back(nums[i + n]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/19/leetcode-1470-%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84/" data-id="ckbl0kpkp0000ndxx4ujbea0u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode-1480-一维数组的动态和" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/19/leetcode-1480-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%92%8C/" class="article-date">
-  <time datetime="2020-06-18T16:28:05.000Z" itemprop="datePublished">2020-06-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/19/leetcode-1480-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%92%8C/">leetcode 1480. 一维数组的动态和</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个数组 <code>nums</code> 。数组「动态和」的计算公式为：<code>runningSum[i] = sum(nums[0]…nums[i])</code> 。</p>
-<p>请返回 <code>nums</code> 的动态和。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4]</span><br><span class="line">输出：[1,3,6,10]</span><br><span class="line">解释：</span><br><span class="line">    动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,1,1,1,1]</span><br><span class="line">输出：[1,2,3,4,5]</span><br><span class="line">解释：</span><br><span class="line">    动态和计算过程为 [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1] 。</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [3,1,2,10,1]</span><br><span class="line">输出：[3,4,6,16,17]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
-<li><code>-10^6 &lt;= nums[i] &lt;= 10^6</code></li>
-</ul>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">runningSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">int</span> pre = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : nums)&#123;</span><br><span class="line">            pre += v;</span><br><span class="line">            res.push_back(pre);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/19/leetcode-1480-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%92%8C/" data-id="ckbl042g20000jzxx4cdxhyzf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -658,7 +679,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" rel="tag">Hexo使用说明</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">个人博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF/" rel="tag">卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" rel="tag">回文串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%B1%E8%84%89/" rel="tag">山脉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF/" rel="tag">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8E%92/" rel="tag">快排</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97/" rel="tag">数字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B4%E9%99%A4/" rel="tag">整除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" rel="tag">类设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" rel="tag">路径和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" rel="tag">连通分量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" rel="tag">Hexo使用说明</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">个人博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%8B%E9%9A%86/" rel="tag">克隆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF/" rel="tag">卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" rel="tag">回文串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%B1%E8%84%89/" rel="tag">山脉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF/" rel="tag">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8E%92/" rel="tag">快排</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97/" rel="tag">数字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B4%E9%99%A4/" rel="tag">整除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" rel="tag">类设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" rel="tag">路径和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" rel="tag">连通分量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
     </div>
   </div>
 
@@ -668,7 +689,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" style="font-size: 10px;">Hexo使用说明</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">个人博客搭建</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 12px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px;">二叉树</a> <a href="/tags/%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" style="font-size: 10px;">回文串</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 14px;">字符串</a> <a href="/tags/%E5%B1%B1%E8%84%89/" style="font-size: 10px;">山脉</a> <a href="/tags/%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">循环</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 10px;">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 16px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%97/" style="font-size: 14px;">数字</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 18px;">数组</a> <a href="/tags/%E6%95%B4%E9%99%A4/" style="font-size: 10px;">整除</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">类设计</a> <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" style="font-size: 12px;">贪心算法</a> <a href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" style="font-size: 10px;">路径和</a> <a href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" style="font-size: 10px;">连通分量</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">链表</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a>
+      <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" style="font-size: 10px;">Hexo使用说明</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">个人博客搭建</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 12px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px;">二叉树</a> <a href="/tags/%E5%85%8B%E9%9A%86/" style="font-size: 10px;">克隆</a> <a href="/tags/%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" style="font-size: 10px;">回文串</a> <a href="/tags/%E5%9B%BE/" style="font-size: 12px;">图</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 14px;">字符串</a> <a href="/tags/%E5%B1%B1%E8%84%89/" style="font-size: 10px;">山脉</a> <a href="/tags/%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">循环</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 10px;">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 16px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%97/" style="font-size: 14px;">数字</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 18px;">数组</a> <a href="/tags/%E6%95%B4%E9%99%A4/" style="font-size: 10px;">整除</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">类设计</a> <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" style="font-size: 12px;">贪心算法</a> <a href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" style="font-size: 10px;">路径和</a> <a href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" style="font-size: 10px;">连通分量</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 12px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">链表</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a>
     </div>
   </div>
 
@@ -690,6 +711,14 @@
       <ul>
         
           <li>
+            <a href="/2020/06/21/leetcode-133-%E5%85%8B%E9%9A%86%E5%9B%BE/">leetcode 133. 克隆图</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/21/leetcode-638-%E5%A4%A7%E7%A4%BC%E5%8C%85/">leetcode 638. 大礼包</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/21/leetcode-676-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AD%94%E6%B3%95%E5%AD%97%E5%85%B8/">leetcode 676. 实现一个魔法字典</a>
           </li>
         
@@ -699,14 +728,6 @@
         
           <li>
             <a href="/2020/06/21/leetcode-124-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/">leetcode 124. 二叉树中的最大路径和</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/20/leetcode-655-%E8%BE%93%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">leetcode 655. 输出二叉树</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/20/leetcode-1472-%E8%AE%BE%E8%AE%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/">leetcode 1472. 设计浏览器历史记录</a>
           </li>
         
       </ul>
