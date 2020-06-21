@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-06-21T15:13:50.241Z</updated>
+  <updated>2020-06-21T15:26:31.353Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 781. 森林中的兔子</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/21/leetcode-781-%E6%A3%AE%E6%9E%97%E4%B8%AD%E7%9A%84%E5%85%94%E5%AD%90/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/21/leetcode-781-%E6%A3%AE%E6%9E%97%E4%B8%AD%E7%9A%84%E5%85%94%E5%AD%90/</id>
+    <published>2020-06-21T15:23:27.000Z</published>
+    <updated>2020-06-21T15:26:31.353Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>森林中，每个兔子都有颜色。其中一些兔子（可能是全部）告诉你还有多少其他的兔子和自己有相同的颜色。我们将这些回答放在 <code>answers</code> 数组里。</p><p>返回森林中兔子的最少数量。</p><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1:"></a>示例1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: answers &#x3D; [1, 1, 2]</span><br><span class="line">输出: 5</span><br><span class="line">解释:</span><br><span class="line">    两只回答了 &quot;1&quot; 的兔子可能有相同的颜色，设为红色。</span><br><span class="line">    之后回答了 &quot;2&quot; 的兔子不会是红色，否则他们的回答会相互矛盾。</span><br><span class="line">    设回答了 &quot;2&quot; 的兔子为蓝色。</span><br><span class="line">    此外，森林中还应有另外 2 只蓝色兔子的回答没有包含在数组中。</span><br><span class="line">    因此森林中兔子的最少数量是 5: 3 只回答的和 2 只没有回答的。</span><br></pre></td></tr></table></figure><h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: answers &#x3D; [10, 10, 10]</span><br><span class="line">输出: 11</span><br></pre></td></tr></table></figure><h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3:"></a>示例3:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: answers &#x3D; []</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure><p><strong>说明:</strong></p><ol><li><code>answers</code> 的长度最大为<code>1000</code>。</li><li><code>answers[i]</code> 是在 <code>[0, 999]</code> 范围内的整数。</li></ol><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRabbits</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; answers)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">lst</span><span class="params">(<span class="number">1000</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> val : answers)&#123;</span><br><span class="line">            lst[val]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++)&#123;</span><br><span class="line">            res += (lst[i] + i)/(i+<span class="number">1</span>)*(i+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;森林中，每个兔子都有颜色。其中一些兔子（可能是全部）告诉你还有多少其他的兔子和自己有相同的颜色。我们将这些回答放在 
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="贪心算法" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数组" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 133. 克隆图</title>
@@ -573,34 +603,6 @@
       <category term="集合" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E9%9B%86%E5%90%88/"/>
     
       <category term="整除" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B4%E9%99%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 1424. 对角线遍历 II</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-1424-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86-II/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-1424-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86-II/</id>
-    <published>2020-06-14T13:51:57.000Z</published>
-    <updated>2020-06-15T22:10:16.180Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个列表 <code>nums</code> ，里面每一个元素都是一个整数列表。请你依照下面各图的规则，按顺序返回 <code>nums</code> 中对角线上的整数。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><img src="../images/sample_1_1424.png" width="30%" /><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[1,4,2,7,5,3,8,6,9]</span><br></pre></td></tr></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><img src="../images/sample_2_1424.png" width="30%" /><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3,4,5],[6,7],[8],[9,10,11],[12,13,14,15,16]]</span><br><span class="line">输出：[1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16]</span><br></pre></td></tr></table></figure><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3],[4],[5,6,7],[8],[9,10,11]]</span><br><span class="line">输出：[1,4,2,5,3,8,6,9,7,10,11]</span><br></pre></td></tr></table></figure><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3,4,5,6]]</span><br><span class="line">输出：[1,2,3,4,5,6]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= nums.length &lt;= 10^5</code></li><li><code>1 &lt;= nums[i].length &lt;= 10^5</code></li><li><code>1 &lt;= nums[i][j] &lt;= 10^9</code></li><li><code>nums</code> 中最多有 <code>10^5</code> 个数字。</li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;long long, int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findDiagonalOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// (0, 0), (1, 0), (1, 1)</span></span><br><span class="line">        <span class="keyword">int</span> m = nums.size();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            n = nums[i].size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">//(x, y) = (i+j, j) = (i+j)*10^5 + j</span></span><br><span class="line">                pos = (i+j)*<span class="number">100000</span> + j;</span><br><span class="line">                lst.push_back(&#123;pos, nums[i][j]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(lst.begin(), lst.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(PR pr : lst)&#123;</span><br><span class="line">            res.push_back(pr.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给你一个列表 &lt;code&gt;nums&lt;/code&gt; ，里面每一个元素都是一个整数列表。请你依照下面各图的规则，按顺序返
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="排序" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
