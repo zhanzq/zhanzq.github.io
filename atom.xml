@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-06-21T15:26:31.353Z</updated>
+  <updated>2020-06-22T15:03:07.092Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 503. 下一个更大元素 II</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/22/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/22/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/</id>
+    <published>2020-06-22T15:01:05.000Z</published>
+    <updated>2020-06-22T15:03:07.092Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,1]</span><br><span class="line">输出: [2,-1,2]</span><br><span class="line">解释: </span><br><span class="line">    第一个 1 的下一个更大的数是 2；</span><br><span class="line">    数字 2 找不到下一个更大的数； </span><br><span class="line">    第二个 1 的下一个最大的数需要循环搜索，结果也是 2。</span><br></pre></td></tr></table></figure><p><strong>注意:</strong> 输入数组的长度不会超过 10000。</p><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">nextGreaterElements</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> sz = nums.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(sz, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sz<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stk.empty() &amp;&amp; stk.top() &lt;= nums[i])&#123;</span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sz<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stk.empty() &amp;&amp; stk.top() &lt;= nums[i])&#123;</span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(stk.empty())&#123;</span><br><span class="line">                res[i] = <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                res[i] = stk.top();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="数组" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="stack" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/stack/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 781. 森林中的兔子</title>
@@ -571,38 +601,6 @@
     
     
       <category term="卷积" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%8D%B7%E7%A7%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 368. 最大整除子集</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/15/leetcode-368-%E6%9C%80%E5%A4%A7%E6%95%B4%E9%99%A4%E5%AD%90%E9%9B%86/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/15/leetcode-368-%E6%9C%80%E5%A4%A7%E6%95%B4%E9%99%A4%E5%AD%90%E9%9B%86/</id>
-    <published>2020-06-15T05:14:55.000Z</published>
-    <updated>2020-06-15T05:18:34.834Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给出一个由<strong>无重复</strong>的正整数组成的集合，找出其中最大的整除子集，子集中任意一对 (Si，Sj) 都要满足：Si % Sj = 0 或 Sj % Si = 0。</p><p>如果有多个目标子集，返回其中任何一个均可。</p><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2] (当然, [1,3] 也正确)</span><br></pre></td></tr></table></figure><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,4,8]</span><br><span class="line">输出: [1,2,4,8]</span><br></pre></td></tr></table></figure><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">largestDivisibleSubset</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.empty())&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; lst;</span><br><span class="line">        lst.push_back(&#123;<span class="number">1</span>&#125;);</span><br><span class="line">        <span class="keyword">int</span> sz = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">int</span> i = sz<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> v : lst[i])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(num % v == <span class="number">0</span>)&#123;</span><br><span class="line">                        found = <span class="literal">true</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(found)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i == sz<span class="number">-1</span>)&#123;</span><br><span class="line">                sz++;</span><br><span class="line">                lst.push_back(&#123;num&#125;);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                lst[i+<span class="number">1</span>].push_back(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;sz&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">int</span> pre = lst[sz<span class="number">-1</span>].back();</span><br><span class="line">        res.push_back(pre);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sz<span class="number">-2</span>; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> v : lst[i])&#123;</span><br><span class="line">                <span class="keyword">if</span>(pre%v == <span class="number">0</span>)&#123;</span><br><span class="line">                    res.push_back(v);</span><br><span class="line">                    pre = v;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给出一个由&lt;strong&gt;无重复&lt;/strong&gt;的正整数组成的集合，找出其中最大的整除子集，子集中任意一对 (Si
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="排序" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="集合" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E9%9B%86%E5%90%88/"/>
-    
-      <category term="整除" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B4%E9%99%A4/"/>
     
   </entry>
   
