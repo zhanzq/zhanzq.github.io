@@ -64,6 +64,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-547-朋友圈" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/21/leetcode-547-%E6%9C%8B%E5%8F%8B%E5%9C%88/" class="article-date">
+  <time datetime="2020-06-21T12:55:01.000Z" itemprop="datePublished">2020-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/21/leetcode-547-%E6%9C%8B%E5%8F%8B%E5%9C%88/">leetcode 547. 朋友圈</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>班上有 <strong>N</strong> 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友。所谓的朋友圈，是指所有朋友的集合。</p>
+<p>给定一个 <strong>N * N</strong> 的矩阵 <strong>M</strong>，表示班级中学生之间的朋友关系。如果<code>M[i][j] = 1</code>，表示已知第 i 个和 j 个学生<strong>互为</strong>朋友关系，否则为不知道。你必须输出所有学生中的已知的朋友圈总数。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">[[1,1,0],</span><br><span class="line"> [1,1,0],</span><br><span class="line"> [0,0,1]]</span><br><span class="line">输出: 2 </span><br><span class="line">说明：已知学生0和学生1互为朋友，他们在一个朋友圈。</span><br><span class="line">第2个学生自己在一个朋友圈。所以返回2。</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">[[1,1,0],</span><br><span class="line"> [1,1,1],</span><br><span class="line"> [0,1,1]]</span><br><span class="line">输出: 1</span><br><span class="line">说明：已知学生0和学生1互为朋友，学生1和学生2互为朋友，所以学生0和学生2也是朋友，所以他们三个在一个朋友圈，返回1。</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>N</code> 在<code>[1,200]</code>的范围内。</li>
+<li>对于所有学生，有<code>M[i][i] = 1</code>。</li>
+<li>如果有<code>M[i][j] = 1</code>，则有<code>M[j][i] = 1</code>。</li>
+</ul>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findCircleNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; M)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = M.size();</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; <span class="title">visited</span><span class="params">(n, <span class="literal">false</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">friends</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(M[i][j] == <span class="number">1</span> &amp;&amp; i != j)&#123;</span><br><span class="line">                    friends[i].push_back(j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(visited[i])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                res++;</span><br><span class="line">                visited[i] = <span class="literal">true</span>;</span><br><span class="line">                <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">                stk.push(i);</span><br><span class="line">                <span class="keyword">while</span>(!stk.empty())&#123;</span><br><span class="line">                    <span class="keyword">int</span> pre = stk.top();</span><br><span class="line">                    stk.pop();</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> nxt : friends[pre])&#123;</span><br><span class="line">                        <span class="keyword">if</span>(!visited[nxt])&#123;</span><br><span class="line">                            stk.push(nxt);</span><br><span class="line">                            visited[nxt] = <span class="literal">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/21/leetcode-547-%E6%9C%8B%E5%8F%8B%E5%9C%88/" data-id="ckbp8eklg000wyixxf9yqe5w5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" rel="tag">连通分量</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-124-二叉树中的最大路径和" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/21/leetcode-124-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/" class="article-date">
@@ -172,67 +228,6 @@
 
 
   
-    <article id="post-leetcode-1472-设计浏览器历史记录" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/20/leetcode-1472-%E8%AE%BE%E8%AE%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time datetime="2020-06-20T15:20:55.000Z" itemprop="datePublished">2020-06-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/20/leetcode-1472-%E8%AE%BE%E8%AE%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/">leetcode 1472. 设计浏览器历史记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>你有一个只支持单个标签页的 <strong>浏览器</strong> ，最开始你浏览的网页是 <code>homepage</code> ，你可以访问其他的网站 <code>url</code> ，也可以在浏览历史中后退 <code>steps</code> 步或前进 <code>steps</code> 步。</p>
-<p>请你实现 <code>BrowserHistory</code> 类：</p>
-<ul>
-<li><code>BrowserHistory(string homepage)</code> ，用 <code>homepage</code> 初始化浏览器类。</li>
-<li><code>void visit(string url)</code> 从当前页跳转访问 <code>url</code> 对应的页面  。执行此操作会把浏览历史前进的记录全部删除。</li>
-<li><code>string back(int steps)</code> 在浏览历史中后退 <code>steps</code> 步。如果你只能在浏览历史中后退至多 x 步且 <code>steps &gt; x</code> ，那么你只后退 <code>x</code> 步。请返回后退 至多 <code>steps</code> 步以后的 <code>url</code> 。</li>
-<li><code>string forward(int steps)</code> 在浏览历史中前进 steps 步。如果你只能在浏览历史中前进至多 <code>x</code> 步且 <code>steps &gt; x</code> ，那么你只前进 <code>x</code> 步。请返回前进 至多 <code>steps</code>步以后的 <code>url</code> 。</li>
-</ul>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[&quot;BrowserHistory&quot;,&quot;visit&quot;,&quot;visit&quot;,&quot;visit&quot;,&quot;back&quot;,&quot;back&quot;,&quot;forward&quot;,&quot;visit&quot;,&quot;forward&quot;,&quot;back&quot;,&quot;back&quot;][[&quot;leetcode.com&quot;],[&quot;google.com&quot;],[&quot;facebook.com&quot;],[&quot;youtube.com&quot;],[1],[1],[1],[&quot;linkedin.com&quot;],[2],[2],[7]]</span><br><span class="line">输出：</span><br><span class="line">[null,null,null,null,&quot;facebook.com&quot;,&quot;google.com&quot;,&quot;facebook.com&quot;,null,&quot;linkedin.com&quot;,&quot;google.com&quot;,&quot;leetcode.com&quot;]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">BrowserHistory browserHistory &#x3D; new BrowserHistory(&quot;leetcode.com&quot;);</span><br><span class="line">browserHistory.visit(&quot;google.com&quot;);       &#x2F;&#x2F; 你原本在浏览 &quot;leetcode.com&quot; 。访问 &quot;google.com&quot;</span><br><span class="line">browserHistory.visit(&quot;facebook.com&quot;);     &#x2F;&#x2F; 你原本在浏览 &quot;google.com&quot; 。访问 &quot;facebook.com&quot;</span><br><span class="line">browserHistory.visit(&quot;youtube.com&quot;);      &#x2F;&#x2F; 你原本在浏览 &quot;facebook.com&quot; 。访问 &quot;youtube.com&quot;</span><br><span class="line">browserHistory.back(1);                   &#x2F;&#x2F; 你原本在浏览 &quot;youtube.com&quot; ，后退到 &quot;facebook.com&quot; 并返回 &quot;facebook.com&quot;</span><br><span class="line">browserHistory.back(1);                   &#x2F;&#x2F; 你原本在浏览 &quot;facebook.com&quot; ，后退到 &quot;google.com&quot; 并返回 &quot;google.com&quot;</span><br><span class="line">browserHistory.forward(1);                &#x2F;&#x2F; 你原本在浏览 &quot;google.com&quot; ，前进到 &quot;facebook.com&quot; 并返回 &quot;facebook.com&quot;</span><br><span class="line">browserHistory.visit(&quot;linkedin.com&quot;);     &#x2F;&#x2F; 你原本在浏览 &quot;facebook.com&quot; 。 访问 &quot;linkedin.com&quot;</span><br><span class="line">browserHistory.forward(2);                &#x2F;&#x2F; 你原本在浏览 &quot;linkedin.com&quot; ，你无法前进任何步数。</span><br><span class="line">browserHistory.back(2);                   &#x2F;&#x2F; 你原本在浏览 &quot;linkedin.com&quot; ，后退两步依次先到 &quot;facebook.com&quot; ，然后到 &quot;google.com&quot; ，并返回 &quot;google.com&quot;</span><br><span class="line">browserHistory.back(7);                   &#x2F;&#x2F; 你原本在浏览 &quot;google.com&quot;， 你只能后退一步到 &quot;leetcode.com&quot; ，并返回 &quot;leetcode.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= homepage.length &lt;= 20</code></li>
-<li><code>1 &lt;= url.length &lt;= 20</code></li>
-<li><code>1 &lt;= steps &lt;= 100</code></li>
-<li><code>homepage</code> 和 <code>url</code> 都只包含 ‘.’ 或者小写英文字母。</li>
-<li>最多调用 <code>5000</code> 次 <code>visit</code>， <code>back</code> 和 <code>forward</code> 函数。</li>
-</ul>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BrowserHistory</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; hist;</span><br><span class="line">    <span class="keyword">int</span> sz;</span><br><span class="line">    <span class="keyword">int</span> cur;</span><br><span class="line">    BrowserHistory(<span class="built_in">string</span> homepage) &#123;</span><br><span class="line">        hist.push_back(homepage);</span><br><span class="line">        sz = <span class="number">1</span>;</span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">(<span class="built_in">string</span> url)</span> </span>&#123;</span><br><span class="line">        cur++;</span><br><span class="line">        <span class="keyword">if</span>(cur &gt; hist.size())&#123;</span><br><span class="line">            hist.push_back(url);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            hist[cur<span class="number">-1</span>] = url;</span><br><span class="line">        &#125;</span><br><span class="line">        sz = cur;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">back</span><span class="params">(<span class="keyword">int</span> steps)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(steps &gt;= cur)&#123;</span><br><span class="line">            cur = <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cur -= steps;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hist[cur<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">forward</span><span class="params">(<span class="keyword">int</span> steps)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(steps + cur &gt; sz)&#123;</span><br><span class="line">            cur = sz;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cur += steps;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hist[cur<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your BrowserHistory object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * BrowserHistory* obj = new BrowserHistory(homepage);</span></span><br><span class="line"><span class="comment"> * obj-&gt;visit(url);</span></span><br><span class="line"><span class="comment"> * string param_2 = obj-&gt;back(steps);</span></span><br><span class="line"><span class="comment"> * string param_3 = obj-&gt;forward(steps);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/20/leetcode-1472-%E8%AE%BE%E8%AE%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/" data-id="ckbp8ekl3000ayixxgpasg28l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" rel="tag">类设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -268,7 +263,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" style="font-size: 10px;">Hexo使用说明</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/stack/" style="font-size: 12px;">stack</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">个人博客搭建</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 12px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px;">二叉树</a> <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" style="font-size: 10px;">二进制</a> <a href="/tags/%E5%85%8B%E9%9A%86/" style="font-size: 10px;">克隆</a> <a href="/tags/%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" style="font-size: 10px;">回文串</a> <a href="/tags/%E5%9B%BE/" style="font-size: 12px;">图</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 14px;">字符串</a> <a href="/tags/%E5%B1%B1%E8%84%89/" style="font-size: 10px;">山脉</a> <a href="/tags/%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">循环</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 10px;">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 16px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%97/" style="font-size: 14px;">数字</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 18px;">数组</a> <a href="/tags/%E6%95%B4%E9%99%A4/" style="font-size: 10px;">整除</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">类设计</a> <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" style="font-size: 14px;">贪心算法</a> <a href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" style="font-size: 10px;">路径和</a> <a href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" style="font-size: 10px;">连通分量</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 14px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">链表</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a>
+      <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Hexo%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" style="font-size: 10px;">Hexo使用说明</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/map/" style="font-size: 10px;">map</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/stack/" style="font-size: 12px;">stack</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">个人博客搭建</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 12px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px;">二叉树</a> <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" style="font-size: 10px;">二进制</a> <a href="/tags/%E5%85%8B%E9%9A%86/" style="font-size: 10px;">克隆</a> <a href="/tags/%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 10px;">双指针</a> <a href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" style="font-size: 10px;">回文串</a> <a href="/tags/%E5%9B%BE/" style="font-size: 12px;">图</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 14px;">字符串</a> <a href="/tags/%E5%B1%B1%E8%84%89/" style="font-size: 10px;">山脉</a> <a href="/tags/%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">循环</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 10px;">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 16px;">排序</a> <a href="/tags/%E6%95%B0%E5%AD%97/" style="font-size: 14px;">数字</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 18px;">数组</a> <a href="/tags/%E6%95%B4%E9%99%A4/" style="font-size: 10px;">整除</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E7%B1%BB%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">类设计</a> <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" style="font-size: 14px;">贪心算法</a> <a href="/tags/%E8%B7%AF%E5%BE%84%E5%92%8C/" style="font-size: 10px;">路径和</a> <a href="/tags/%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" style="font-size: 10px;">连通分量</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 14px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a>
     </div>
   </div>
 
@@ -290,6 +285,10 @@
       <ul>
         
           <li>
+            <a href="/2020/06/26/leetcode-%E9%9D%A2%E8%AF%95%E9%A2%98-02-01-%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%8A%82%E7%82%B9/">leetcode 面试题 02.01. 移除重复节点</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/23/leetcode-769-%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AE%8C%E6%88%90%E6%8E%92%E5%BA%8F%E7%9A%84%E5%9D%97/">leetcode 769. 最多能完成排序的块</a>
           </li>
         
@@ -303,10 +302,6 @@
         
           <li>
             <a href="/2020/06/22/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/">leetcode 503. 下一个更大元素 II</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/leetcode-781-%E6%A3%AE%E6%9E%97%E4%B8%AD%E7%9A%84%E5%85%94%E5%AD%90/">leetcode 781. 森林中的兔子</a>
           </li>
         
       </ul>
