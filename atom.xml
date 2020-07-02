@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-06-30T14:59:34.867Z</updated>
+  <updated>2020-07-02T15:24:28.833Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 378. 有序矩阵中第K小的元素</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/02/leetcode-378-%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/02/leetcode-378-%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0/</id>
+    <published>2020-07-02T15:22:06.000Z</published>
+    <updated>2020-07-02T15:24:28.833Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个 <code>n x n</code> 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 <code>k</code> 小的元素。<br>请注意，它是排序后的第 <code>k</code> 小元素，而不是第 <code>k</code> 个不同的元素。</p><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">matrix &#x3D; [</span><br><span class="line">   [ 1,  5,  9],</span><br><span class="line">   [10, 11, 13],</span><br><span class="line">   [12, 13, 15]</span><br><span class="line">],</span><br><span class="line">k &#x3D; 8,</span><br><span class="line"></span><br><span class="line">返回 13。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong><br>你可以假设 <code>k</code> 的值永远是有效的，<code>1 ≤ k ≤ n^2</code> 。</p><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getLessNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;matrix, <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp; row : matrix)&#123;</span><br><span class="line">            res += lower_bound(row.begin(), row.end(), v) - row.begin();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.size();</span><br><span class="line">        <span class="keyword">int</span> l = matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> r = matrix[n<span class="number">-1</span>][n<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">            mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> count = getLessNum(matrix, mid);</span><br><span class="line">            <span class="comment">// cout&lt;&lt;"v = "&lt;&lt;mid&lt;&lt;", count = "&lt;&lt;count&lt;&lt;endl;</span></span><br><span class="line">            <span class="keyword">if</span>(count &gt;= k)&#123;</span><br><span class="line">                <span class="comment">// less than mid is more ==&gt; mid is larger</span></span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给定一个 &lt;code&gt;n x n&lt;/code&gt; 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 &lt;code&gt;k&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="二分查找" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 1471. 数组中的 k 个最强值</title>
@@ -563,33 +591,6 @@
       <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
     
       <category term="异或" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%BC%82%E6%88%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 面试题 02.01. 移除重复节点</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/26/leetcode-%E9%9D%A2%E8%AF%95%E9%A2%98-02-01-%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%8A%82%E7%82%B9/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/26/leetcode-%E9%9D%A2%E8%AF%95%E9%A2%98-02-01-%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%8A%82%E7%82%B9/</id>
-    <published>2020-06-26T15:18:59.000Z</published>
-    <updated>2020-06-26T15:21:21.361Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。</p><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1:"></a>示例1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1, 2, 3, 3, 2, 1]</span><br><span class="line">输出：[1, 2, 3]</span><br></pre></td></tr></table></figure><h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1, 1, 1, 1, 2]</span><br><span class="line">输出：[1, 2]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ol><li>链表长度在[0, 20000]范围内。</li><li>链表元素在[0, 20000]范围内。</li></ol><p><strong>进阶：</strong><br>如果不得使用临时缓冲区，该怎么解决？</p><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeDuplicateNodes</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head)&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; <span class="title">st</span><span class="params">(<span class="number">20010</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">        ListNode* node = head;</span><br><span class="line">        ListNode* nxt = head-&gt;next;</span><br><span class="line">        st[head-&gt;val] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span>(nxt)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[nxt-&gt;val] == <span class="literal">false</span>)&#123;</span><br><span class="line">                node-&gt;next = nxt;</span><br><span class="line">                st[nxt-&gt;val] = <span class="literal">true</span>;</span><br><span class="line">                node = nxt;</span><br><span class="line">            &#125;</span><br><span class="line">            nxt = nxt-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。&lt;/p&gt;
-&lt;h3 id=&quot;示例1&quot;&gt;&lt;a href=&quot;#
-      
-    
-    </summary>
-    
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="链表" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   
