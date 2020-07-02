@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-07-02T15:24:28.833Z</updated>
+  <updated>2020-07-02T15:41:56.941Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 718. 最长重复子数组</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/02/leetcode-718-%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/02/leetcode-718-%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</id>
+    <published>2020-07-02T15:38:42.000Z</published>
+    <updated>2020-07-02T15:41:56.941Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给两个整数数组 <code>A</code> 和 <code>B</code> ，返回两个数组中公共的、长度最长的子数组的长度。</p><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">A: [1,2,3,2,1]</span><br><span class="line">B: [3,2,1,4,7]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">长度最长的公共子数组是 [3, 2, 1] 。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= len(A), len(B) &lt;= 1000</code></li><li><code>0 &lt;= A[i], B[i] &lt; 100</code></li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// method 1: original DP</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLength0</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = A.size(), n = B.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">dp</span><span class="params">(m+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>, <span class="number">0</span>))</span></span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(A[i<span class="number">-1</span>] == B[j<span class="number">-1</span>])&#123;</span><br><span class="line">                    dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">                    res = max(res, dp[i][j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// method 2: reduce the space complexity</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = A.size(), n = B.size();</span><br><span class="line">        <span class="comment">// vector&lt;vector&lt;int&gt;&gt; dp(m+1, vector&lt;int&gt;(n+1, 0));</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">pre</span><span class="params">(n+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">cur</span><span class="params">(n+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(A[i<span class="number">-1</span>] == B[j<span class="number">-1</span>])&#123;</span><br><span class="line">                    cur[j] = pre[j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">                    res = max(res, cur[j]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    cur[j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            pre = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给两个整数数组 &lt;code&gt;A&lt;/code&gt; 和 &lt;code&gt;B&lt;/code&gt; ，返回两个数组中公共的、长度最长的子
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="DP" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/DP/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 378. 有序矩阵中第K小的元素</title>
@@ -562,35 +590,6 @@
     
     
       <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 1486. 数组异或操作</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/26/leetcode-1486-%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/26/leetcode-1486-%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/</id>
-    <published>2020-06-26T15:30:57.000Z</published>
-    <updated>2020-06-26T15:34:03.247Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你两个整数，<code>n</code> 和 <code>start</code> 。</p><p>数组 <code>nums</code> 定义为：<code>nums[i] = start + 2*i</code>（下标从 0 开始）且 <code>n == nums.length</code> 。</p><p>请返回 <code>nums</code> 中所有元素按位异或（<strong>XOR</strong>）后得到的结果。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 5, start &#x3D; 0</span><br><span class="line">输出：8</span><br><span class="line">解释：数组 nums 为 [0, 2, 4, 6, 8]，其中 (0 ^ 2 ^ 4 ^ 6 ^ 8) &#x3D; 8 。</span><br><span class="line">     &quot;^&quot; 为按位异或 XOR 运算符。</span><br></pre></td></tr></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 4, start &#x3D; 3</span><br><span class="line">输出：8</span><br><span class="line">解释：数组 nums 为 [3, 5, 7, 9]，其中 (3 ^ 5 ^ 7 ^ 9) &#x3D; 8.</span><br></pre></td></tr></table></figure><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1, start &#x3D; 7</span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 10, start &#x3D; 5</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= n &lt;= 1000</code></li><li><code>0 &lt;= start &lt;= 1000</code></li><li><code>n == nums.length</code></li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">xorOperation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            res ^= (start + <span class="number">2</span>*i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给你两个整数，&lt;code&gt;n&lt;/code&gt; 和 &lt;code&gt;start&lt;/code&gt; 。&lt;/p&gt;
-&lt;p&gt;数组 &lt;co
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="异或" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%BC%82%E6%88%96/"/>
     
   </entry>
   
