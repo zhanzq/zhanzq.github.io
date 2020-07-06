@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-07-06T15:10:48.596Z</updated>
+  <updated>2020-07-06T15:15:47.887Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 1502. 判断能否形成等差数列</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/06/leetcode-1502-%E5%88%A4%E6%96%AD%E8%83%BD%E5%90%A6%E5%BD%A2%E6%88%90%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/06/leetcode-1502-%E5%88%A4%E6%96%AD%E8%83%BD%E5%90%A6%E5%BD%A2%E6%88%90%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97/</id>
+    <published>2020-07-06T15:14:35.000Z</published>
+    <updated>2020-07-06T15:15:47.887Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个数字数组 <code>arr</code> 。</p><p>如果一个数列中，任意相邻两项的差总等于同一个常数，那么这个数列就称为 <strong>等差数列</strong> 。</p><p>如果可以重新排列数组形成等差数列，请返回 <code>true</code> ；否则，返回 <code>false</code> 。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [3,5,1]</span><br><span class="line">输出：true</span><br><span class="line">解释：对数组重新排序得到 [1,3,5] 或者 [5,3,1] ，任意相邻两项的差分别为 2 或 -2 ，可以形成等差数列。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [1,2,4]</span><br><span class="line">输出：false</span><br><span class="line">解释：无法通过重新排序得到等差数列。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><p><code>2 &lt;= arr.length &lt;= 1000</code></p></li><li><p><code>-10^6 &lt;= arr[i] &lt;= 10^6</code></p></li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canMakeArithmeticProgression</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        sort(arr.begin(), arr.end());</span><br><span class="line">        <span class="keyword">int</span> diff = arr[<span class="number">1</span>] - arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> n = arr.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(diff != arr[i] - arr[i<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给你一个数字数组 &lt;code&gt;arr&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;如果一个数列中，任意相邻两项的差总等于同一个常
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="数组" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode 1503. 所有蚂蚁掉下来前的最后一刻</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/06/leetcode-1503-%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/06/leetcode-1503-%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/</id>
+    <published>2020-07-06T15:11:18.000Z</published>
+    <updated>2020-07-06T15:14:01.988Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>有一块木板，长度为 <code>n</code> 个 <strong>单位</strong> 。一些蚂蚁在木板上移动，每只蚂蚁都以 <strong>每秒一个单位</strong> 的速度移动。其中，一部分蚂蚁向 <strong>左</strong> 移动，其他蚂蚁向 <strong>右</strong> 移动。</p><p>当两只向 <strong>不同</strong> 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。</p><p>而当蚂蚁在某一时刻 <code>t</code> 到达木板的一端时，它立即从木板上掉下来。</p><p>给你一个整数 <code>n</code> 和两个整数数组 <code>left</code> 以及 <code>right</code> 。两个数组分别标识向左或者向右移动的蚂蚁在 <code>t = 0</code> 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p><p><strong>示例 1：</strong></p><p><img src="../images/ants1.png" alt="img"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 4, left &#x3D; [4,3], right &#x3D; [0,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：如上图所示：</span><br><span class="line">-下标 0 处的蚂蚁命名为 A 并向右移动。</span><br><span class="line">-下标 1 处的蚂蚁命名为 B 并向右移动。</span><br><span class="line">-下标 3 处的蚂蚁命名为 C 并向左移动。</span><br><span class="line">-下标 4 处的蚂蚁命名为 D 并向左移动。</span><br><span class="line">请注意，蚂蚁在木板上的最后时刻是 t &#x3D; 4 秒，之后蚂蚁立即从木板上掉下来。（也就是说在 t &#x3D; 4.0000000001 时，木板上没有蚂蚁）。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><p><img src="../images/ants2.png" alt="img"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 7, left &#x3D; [], right &#x3D; [0,1,2,3,4,5,6,7]</span><br><span class="line">输出：7</span><br><span class="line">解释：所有蚂蚁都向右移动，下标为 0 的蚂蚁需要 7 秒才能从木板上掉落。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><p><img src="../images/ants3.png" alt="img"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 7, left &#x3D; [0,1,2,3,4,5,6,7], right &#x3D; []</span><br><span class="line">输出：7</span><br><span class="line">解释：所有蚂蚁都向左移动，下标为 7 的蚂蚁需要 7 秒才能从木板上掉落。</span><br></pre></td></tr></table></figure><p><strong>示例 4：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 9, left &#x3D; [5], right &#x3D; [4]</span><br><span class="line">输出：5</span><br><span class="line">解释：t &#x3D; 1 秒时，两只蚂蚁将回到初始位置，但移动方向与之前相反。</span><br></pre></td></tr></table></figure><p><strong>示例 5：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 6, left &#x3D; [6], right &#x3D; [0]</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= n &lt;= 10^4</code></li><li><code>0 &lt;= left.length &lt;= n + 1</code></li><li><code>0 &lt;= left[i] &lt;= n</code></li><li><code>0 &lt;= right.length &lt;= n + 1</code></li><li><code>0 &lt;= right[i] &lt;= n</code></li><li><code>1 &lt;= left.length + right.length &lt;= n + 1</code></li><li><code>left</code> 和 <code>right</code> 中的所有值都是唯一的，并且每个值 <strong>只能出现在二者之一</strong> 中。</li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getLastMoment</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; left, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxv = <span class="number">0</span>, minv = n+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : left)&#123;</span><br><span class="line">            maxv = max(maxv, v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : right)&#123;</span><br><span class="line">            minv = min(minv, v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max(maxv, n - minv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;有一块木板，长度为 &lt;code&gt;n&lt;/code&gt; 个 &lt;strong&gt;单位&lt;/strong&gt; 。一些蚂蚁在木板上移动
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="贪心算法" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 1504. 统计全 1 子矩形</title>
@@ -544,63 +601,6 @@
       <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
     
       <category term="双指针" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 5432. 去掉最低工资和最高工资后的工资平均值</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/</id>
-    <published>2020-06-27T16:07:20.000Z</published>
-    <updated>2020-06-27T16:08:59.979Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个整数数组 <code>salary</code> ，数组里每个数都是 <strong>唯一</strong> 的，其中 <code>salary[i]</code> 是第 <code>i</code> 个员工的工资。</p><p>请你返回去掉最低工资和最高工资以后，剩下员工工资的平均值。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [4000,3000,1000,2000]</span><br><span class="line">输出：2500.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 4000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000+3000)&#x2F;2&#x3D; 2500</span><br></pre></td></tr></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [1000,2000,3000]</span><br><span class="line">输出：2000.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 3000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000)&#x2F;1&#x3D; 2000</span><br></pre></td></tr></table></figure><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [6000,5000,4000,3000,2000,1000]</span><br><span class="line">输出：3500.00000</span><br></pre></td></tr></table></figure><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [8000,9000,2000,3000,6000,1000]</span><br><span class="line">输出：4750.00000</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>3 &lt;= salary.length &lt;= 100</code></li><li><code>10^3 &lt;= salary[i] &lt;= 10^6</code></li><li><code>salary[i]</code> 是唯一的。</li><li>与真实值误差在 <code>10^-5</code> 以内的结果都将视为正确答案。</li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">average</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; salary)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minval = INT_MAX, maxval = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> n = salary.size();</span><br><span class="line">        <span class="keyword">int</span> sumval = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : salary)&#123;</span><br><span class="line">            minval = min(v, minval);</span><br><span class="line">            maxval = max(v, maxval);</span><br><span class="line">            sumval += v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1.0</span> * (sumval - minval - maxval)/(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给你一个整数数组 &lt;code&gt;salary&lt;/code&gt; ，数组里每个数都是 &lt;strong&gt;唯一&lt;/strong&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="数组" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 5433. n 的第 k 个因子</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5433-n-%E7%9A%84%E7%AC%AC-k-%E4%B8%AA%E5%9B%A0%E5%AD%90/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5433-n-%E7%9A%84%E7%AC%AC-k-%E4%B8%AA%E5%9B%A0%E5%AD%90/</id>
-    <published>2020-06-27T16:05:11.000Z</published>
-    <updated>2020-06-27T16:06:49.213Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你两个正整数 <code>n</code> 和 <code>k</code> 。</p><p>如果正整数 <code>i</code> 满足 <code>n % i == 0</code> ，那么我们就说正整数 <code>i</code> 是整数 <code>n</code> 的因子。</p><p>考虑整数 <code>n</code> 的所有因子，将它们 <strong>升序排列</strong> 。请你返回第 <code>k</code> 个因子。如果 <code>n</code> 的因子数少于 <code>k</code> ，请你返回 <strong>-1</strong> 。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 12, k &#x3D; 3</span><br><span class="line">输出：3</span><br><span class="line">解释：因子列表包括 [1, 2, 3, 4, 6, 12]，第 3 个因子是 3 。</span><br></pre></td></tr></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 7, k &#x3D; 2</span><br><span class="line">输出：7</span><br><span class="line">解释：因子列表包括 [1, 7] ，第 2 个因子是 7 。</span><br></pre></td></tr></table></figure><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 4, k &#x3D; 4</span><br><span class="line">输出：-1</span><br><span class="line">解释：因子列表包括 [1, 2, 4] ，只有 3 个因子，所以我们应该返回 -1 。</span><br></pre></td></tr></table></figure><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1, k &#x3D; 1</span><br><span class="line">输出：1</span><br><span class="line">解释：因子列表包括 [1] ，第 1 个因子为 1 。</span><br></pre></td></tr></table></figure><h3 id="示例-5："><a href="#示例-5：" class="headerlink" title="示例 5："></a>示例 5：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1000, k &#x3D; 3</span><br><span class="line">输出：4</span><br><span class="line">解释：因子列表包括 [1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 125, 200, 250, 500, 1000] 。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= k &lt;= n &lt;= 1000</code></li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthFactor</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> root = (<span class="keyword">int</span>)<span class="built_in">sqrt</span>(n) + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left, right;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= root; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n%i == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(n/i &gt; i)&#123;</span><br><span class="line">                    left.push_back(i);</span><br><span class="line">                    right.push_back(n/i);</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(n/i == i)&#123;</span><br><span class="line">                    left.push_back(i);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        left.insert(left.end(), right.rbegin(), right.rend());</span><br><span class="line">        <span class="keyword">if</span>(k &gt; left.size())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> left[k<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;给你两个正整数 &lt;code&gt;n&lt;/code&gt; 和 &lt;code&gt;k&lt;/code&gt; 。&lt;/p&gt;
-&lt;p&gt;如果正整数 &lt;co
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="因子" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%9B%A0%E5%AD%90/"/>
     
   </entry>
   
