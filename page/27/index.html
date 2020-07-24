@@ -64,6 +64,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-962-最大宽度坡" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/" class="article-date">
+  <time datetime="2020-06-17T15:02:20.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/">leetcode 962. 最大宽度坡</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个整数数组 <code>A</code>，坡是元组 <code>(i, j)</code>，其中 <code>i &lt; j</code> 且 <code>A[i] &lt;= A[j]</code>。这样的坡的宽度为 <code>j - i</code>。</p>
+<p>找出 <code>A</code> 中的坡的最大宽度，如果不存在，返回 0 。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[6,0,8,2,1,5]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">	最大宽度的坡为 (i, j) &#x3D; (1, 5): A[1] &#x3D; 0 且 A[5] &#x3D; 5.</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[9,8,1,0,1,9,4,0,4,1]</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">	最大宽度的坡为 (i, j) &#x3D; (2, 9): A[2] &#x3D; 1 且 A[9] &#x3D; 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li>2 &lt;= A.length &lt;= 50000</li>
+<li>0 &lt;= A[i] &lt;= 50000</li>
+</ol>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;PR&gt; &amp;lst, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = lst.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">            mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(lst[mid].first &gt; val)&#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lst[l].second;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxWidthRamp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst;</span><br><span class="line">        <span class="keyword">int</span> sz = A.size();</span><br><span class="line">        <span class="keyword">int</span> lst_sz = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(lst_sz == <span class="number">0</span> || lst.back().first &gt; A[i])&#123;</span><br><span class="line">                lst.push_back(&#123;A[i], i&#125;);</span><br><span class="line">                lst_sz++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// lst[idx].first &lt; A[i]</span></span><br><span class="line">                <span class="keyword">int</span> idx = binarySearch(lst, A[i]);</span><br><span class="line">                res = max(res, i - idx);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/17/leetcode-962-%E6%9C%80%E5%A4%A7%E5%AE%BD%E5%BA%A6%E5%9D%A1/" data-id="ckbp8ekmc002byixxbo5ieto0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-一维卷积" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/16/%E4%B8%80%E7%BB%B4%E5%8D%B7%E7%A7%AF/" class="article-date">
@@ -179,73 +234,11 @@
 
 
   
-    <article id="post-leetcode-1424-对角线遍历-II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/14/leetcode-1424-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86-II/" class="article-date">
-  <time datetime="2020-06-14T13:51:57.000Z" itemprop="datePublished">2020-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/leetcode-1424-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86-II/">leetcode 1424. 对角线遍历 II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个列表 <code>nums</code> ，里面每一个元素都是一个整数列表。请你依照下面各图的规则，按顺序返回 <code>nums</code> 中对角线上的整数。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><img src="../images/sample_1_1424.png" width="30%" />
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[1,4,2,7,5,3,8,6,9]</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><img src="../images/sample_2_1424.png" width="30%" />
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3,4,5],[6,7],[8],[9,10,11],[12,13,14,15,16]]</span><br><span class="line">输出：[1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16]</span><br></pre></td></tr></table></figure>
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3],[4],[5,6,7],[8],[9,10,11]]</span><br><span class="line">输出：[1,4,2,5,3,8,6,9,7,10,11]</span><br></pre></td></tr></table></figure>
-<h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [[1,2,3,4,5,6]]</span><br><span class="line">输出：[1,2,3,4,5,6]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 10^5</code></li>
-<li><code>1 &lt;= nums[i].length &lt;= 10^5</code></li>
-<li><code>1 &lt;= nums[i][j] &lt;= 10^9</code></li>
-<li><code>nums</code> 中最多有 <code>10^5</code> 个数字。</li>
-</ul>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;long long, int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findDiagonalOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// (0, 0), (1, 0), (1, 1)</span></span><br><span class="line">        <span class="keyword">int</span> m = nums.size();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            n = nums[i].size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">//(x, y) = (i+j, j) = (i+j)*10^5 + j</span></span><br><span class="line">                pos = (i+j)*<span class="number">100000</span> + j;</span><br><span class="line">                lst.push_back(&#123;pos, nums[i][j]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(lst.begin(), lst.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(PR pr : lst)&#123;</span><br><span class="line">            res.push_back(pr.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-1424-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86-II/" data-id="ckbp8ekld000pyixx8435hosr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/26/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/28/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/26/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/28/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -298,6 +291,10 @@
       <ul>
         
           <li>
+            <a href="/2020/07/24/leetcode-64-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">leetcode 64. 最小路径和</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/24/leetcode-1025-%E9%99%A4%E6%95%B0%E5%8D%9A%E5%BC%88/">leetcode 1025. 除数博弈</a>
           </li>
         
@@ -311,10 +308,6 @@
         
           <li>
             <a href="/2020/07/15/leetcode-1456-%E5%AE%9A%E9%95%BF%E5%AD%90%E4%B8%B2%E4%B8%AD%E5%85%83%E9%9F%B3%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE/">leetcode 1456. 定长子串中元音的最大数目</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/15/leetcode-120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">leetcode 120. 三角形最小路径和</a>
           </li>
         
       </ul>
