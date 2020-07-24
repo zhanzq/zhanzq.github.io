@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/zhanzq/zhanzq.github.io/"/>
-  <updated>2020-07-15T09:21:16.520Z</updated>
+  <updated>2020-07-24T01:09:15.733Z</updated>
   <id>https://github.com/zhanzq/zhanzq.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 1025. 除数博弈</title>
+    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/24/leetcode-1025-%E9%99%A4%E6%95%B0%E5%8D%9A%E5%BC%88/"/>
+    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/24/leetcode-1025-%E9%99%A4%E6%95%B0%E5%8D%9A%E5%BC%88/</id>
+    <published>2020-07-24T01:05:47.000Z</published>
+    <updated>2020-07-24T01:09:15.733Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>爱丽丝和鲍勃一起玩游戏，他们轮流行动。爱丽丝先手开局。</p><p>最初，黑板上有一个数字 <code>N</code> 。在每个玩家的回合，玩家需要执行以下操作：</p><ul><li>选出任一 <code>x</code>，满足 <code>0 &lt; x &lt; N</code> 且 <code>N % x == 0</code> 。</li><li>用 <code>N - x</code> 替换黑板上的数字 <code>N</code> 。</li></ul><p>如果玩家无法执行这些操作，就会输掉游戏。<br>只有在爱丽丝在游戏中取得胜利时才返回 <code>True</code>，否则返回 <code>False</code>。假设两个玩家都以最佳状态参与游戏。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：true</span><br><span class="line">解释：爱丽丝选择 1，鲍勃无法进行操作。</span><br></pre></td></tr></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：3</span><br><span class="line">输出：false</span><br><span class="line">解释：爱丽丝选择 1，鲍勃也选择 1，然后爱丽丝无法进行操作。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>1 &lt;= N &lt;= 1000</code></li></ul><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">divisorGame</span><span class="params">(<span class="keyword">int</span> N, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;flag)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[N] &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> flag[N] == <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> half = N/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = half; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(N %i == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(!divisorGame(N-i, flag))&#123;</span><br><span class="line">                        flag[N] = <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            flag[N] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">divisorGame</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">flag</span><span class="params">(N+<span class="number">1</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">        flag[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> divisorGame(N, flag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;爱丽丝和鲍勃一起玩游戏，他们轮流行动。爱丽丝先手开局。&lt;/p&gt;
+&lt;p&gt;最初，黑板上有一个数字 &lt;code&gt;N&lt;/co
+      
+    
+    </summary>
+    
+    
+      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
+    
+      <category term="DP" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/DP/"/>
+    
+      <category term="博弈" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 436. 寻找右区间</title>
@@ -574,37 +605,6 @@
       <category term="DP" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/DP/"/>
     
       <category term="偷东西" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%81%B7%E4%B8%9C%E8%A5%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode 481. 神奇字符串</title>
-    <link href="https://github.com/zhanzq/zhanzq.github.io/2020/07/08/leetcode-481-%E7%A5%9E%E5%A5%87%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    <id>https://github.com/zhanzq/zhanzq.github.io/2020/07/08/leetcode-481-%E7%A5%9E%E5%A5%87%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
-    <published>2020-07-07T16:15:55.000Z</published>
-    <updated>2020-07-07T16:19:18.805Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>神奇的字符串 <strong>S</strong> 只包含 ‘1’ 和 ‘2’，并遵守以下规则：</p><p>字符串 <strong>S</strong> 是神奇的，因为串联字符 ‘1’ 和 ‘2’ 的连续出现次数会生成字符串 <strong>S</strong> 本身。</p><p>字符串 <strong>S</strong> 的前几个元素如下：<strong>S</strong> = “1221121221221121122 ……”</p><p>如果我们将 <strong>S</strong> 中连续的 1 和 2 进行分组，它将变成：</p><p>1 22 11 2 1 22 1 22 11 2 11 22 ……</p><p>并且每个组中 ‘1’ 或 ‘2’ 的出现次数分别是：</p><p>1 2 2 1 1 2 1 2 2 1 2 2 ……</p><p>你可以看到上面的出现次数就是 <strong>S</strong> 本身。</p><p>给定一个整数 N 作为输入，返回神奇字符串 <strong>S</strong> 中前 N 个数字中的 ‘1’ 的数目。</p><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：6</span><br><span class="line">输出：3</span><br><span class="line">解释：神奇字符串 **S** 的前 6 个元素是 “12211”，它包含三个 1，因此返回 3。</span><br></pre></td></tr></table></figure><p><strong>注意：</strong> N 不会超过 100,000。</p><hr><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">magicalString</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1  2  2 1 1  2 1  2  2 1  2  2 1 1  2 1 1  2  2 </span></span><br><span class="line">        <span class="comment">// 1 22 11 2 1 22 1 22 11 2 11 22 1 2 11 2 1 22 11</span></span><br><span class="line">        <span class="built_in">string</span> s = <span class="string">"122"</span>;</span><br><span class="line">        <span class="keyword">int</span> ones = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(n &lt;= <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> slow = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> fast = <span class="number">3</span>;</span><br><span class="line">            <span class="keyword">char</span> cur = <span class="string">'1'</span>;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="string">'1'</span> + <span class="string">'2'</span>;</span><br><span class="line">            <span class="keyword">while</span>(fast &lt; n)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s[slow] == <span class="string">'1'</span>)&#123;</span><br><span class="line">                    s += cur;</span><br><span class="line">                    fast++;</span><br><span class="line">                    <span class="keyword">if</span>(cur == <span class="string">'1'</span>)&#123;</span><br><span class="line">                        ones++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    s += cur;</span><br><span class="line">                    <span class="keyword">if</span>(cur == <span class="string">'1'</span>)&#123;</span><br><span class="line">                        ones++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    fast++;</span><br><span class="line">                    <span class="keyword">if</span>(fast &lt; n)&#123;</span><br><span class="line">                        s += cur;</span><br><span class="line">                        fast++;</span><br><span class="line">                        <span class="keyword">if</span>(cur == <span class="string">'1'</span>)&#123;</span><br><span class="line">                            ones++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                slow++;</span><br><span class="line">                cur = sum - cur;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ones;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h3&gt;&lt;p&gt;神奇的字符串 &lt;strong&gt;S&lt;/strong&gt; 只包含 ‘1’ 和 ‘2’，并遵守以下规则：&lt;/p&gt;
-&lt;p&gt;字符
-      
-    
-    </summary>
-    
-    
-      <category term="算法编程" scheme="https://github.com/zhanzq/zhanzq.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="leetcode" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/leetcode/"/>
-    
-      <category term="字符串" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-      <category term="双指针" scheme="https://github.com/zhanzq/zhanzq.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
