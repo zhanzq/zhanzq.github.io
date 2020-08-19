@@ -5,20 +5,20 @@
   
 
   
-  <title>leetcode 5432. 去掉最低工资和最高工资后的工资平均值 | zhanzq的个人博客</title>
+  <title>leetcode 647. 回文子串 | zhanzq的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目描述：给你一个整数数组 salary ，数组里每个数都是 唯一 的，其中 salary[i] 是第 i 个员工的工资。 请你返回去掉最低工资和最高工资以后，剩下员工工资的平均值。 示例 1：1234输入：salary &#x3D; [4000,3000,1000,2000]输出：2500.00000解释：最低工资和最高工资分别是 1000 和 4000 。去掉最低工资和最高工资以后的平均工资是">
+  <meta name="description" content="题目描述：给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。 具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。 示例 1：123输入：&quot;abc&quot;输出：3解释：三个回文子串: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;  示例 2：123输入：&quot;aaa&quot;输出：6解释：6个回文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 5432. 去掉最低工资和最高工资后的工资平均值">
-<meta property="og:url" content="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/index.html">
+<meta property="og:title" content="leetcode 647. 回文子串">
+<meta property="og:url" content="https://github.com/zhanzq/zhanzq.github.io/2020/08/19/leetcode-647-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/index.html">
 <meta property="og:site_name" content="zhanzq的个人博客">
-<meta property="og:description" content="题目描述：给你一个整数数组 salary ，数组里每个数都是 唯一 的，其中 salary[i] 是第 i 个员工的工资。 请你返回去掉最低工资和最高工资以后，剩下员工工资的平均值。 示例 1：1234输入：salary &#x3D; [4000,3000,1000,2000]输出：2500.00000解释：最低工资和最高工资分别是 1000 和 4000 。去掉最低工资和最高工资以后的平均工资是">
+<meta property="og:description" content="题目描述：给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。 具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。 示例 1：123输入：&quot;abc&quot;输出：3解释：三个回文子串: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;  示例 2：123输入：&quot;aaa&quot;输出：6解释：6个回文">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2020-06-27T16:07:20.000Z">
-<meta property="article:modified_time" content="2020-06-27T16:08:59.979Z">
+<meta property="article:published_time" content="2020-08-19T02:36:35.000Z">
+<meta property="article:modified_time" content="2020-08-19T02:38:07.194Z">
 <meta property="article:author" content="zhanzq">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="数组">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="回文串">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zhanzq的个人博客" type="application/atom+xml">
@@ -68,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode-5432-去掉最低工资和最高工资后的工资平均值" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode-647-回文子串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/" class="article-date">
-  <time datetime="2020-06-27T16:07:20.000Z" itemprop="datePublished">2020-06-28</time>
+    <a href="/2020/08/19/leetcode-647-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="article-date">
+  <time datetime="2020-08-19T02:36:35.000Z" itemprop="datePublished">2020-08-19</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode 5432. 去掉最低工资和最高工资后的工资平均值
+      leetcode 647. 回文子串
     </h1>
   
 
@@ -94,36 +94,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个整数数组 <code>salary</code> ，数组里每个数都是 <strong>唯一</strong> 的，其中 <code>salary[i]</code> 是第 <code>i</code> 个员工的工资。</p>
-<p>请你返回去掉最低工资和最高工资以后，剩下员工工资的平均值。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [4000,3000,1000,2000]</span><br><span class="line">输出：2500.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 4000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000+3000)&#x2F;2&#x3D; 2500</span><br></pre></td></tr></table></figure>
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。</p>
+<p>具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;abc&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：三个回文子串: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [1000,2000,3000]</span><br><span class="line">输出：2000.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 3000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000)&#x2F;1&#x3D; 2000</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [6000,5000,4000,3000,2000,1000]</span><br><span class="line">输出：3500.00000</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [8000,9000,2000,3000,6000,1000]</span><br><span class="line">输出：4750.00000</span><br></pre></td></tr></table></figure>
-
-
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;aaa&quot;</span><br><span class="line">输出：6</span><br><span class="line">解释：6个回文子串: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;</span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>3 &lt;= salary.length &lt;= 100</code></li>
-<li><code>10^3 &lt;= salary[i] &lt;= 10^6</code></li>
-<li><code>salary[i]</code> 是唯一的。</li>
-<li>与真实值误差在 <code>10^-5</code> 以内的结果都将视为正确答案。</li>
+<li>输入的字符串长度不会超过 1000 。</li>
 </ul>
 <hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">average</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; salary)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minval = INT_MAX, maxval = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> n = salary.size();</span><br><span class="line">        <span class="keyword">int</span> sumval = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : salary)&#123;</span><br><span class="line">            minval = min(v, minval);</span><br><span class="line">            maxval = max(v, maxval);</span><br><span class="line">            sumval += v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1.0</span> * (sumval - minval - maxval)/(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// method 1: two cycles</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countSubstrings0</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sz = s.size();</span><br><span class="line">        <span class="keyword">if</span>(sz == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = sz;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; <span class="title">dp</span><span class="params">(sz, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(sz, <span class="literal">false</span>))</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            dp[i][i] = <span class="literal">true</span>;</span><br><span class="line">            dp[i][i<span class="number">-1</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">1</span>; l &lt; sz; l++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz - l; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s[i] == s[i+l] &amp;&amp; dp[i+<span class="number">1</span>][i+l<span class="number">-1</span>])&#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    dp[i][i+l] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// method 2: DP</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sz = s.size();</span><br><span class="line">        <span class="keyword">if</span>(sz == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = sz;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            <span class="comment">// calculate the number of palindromic strings ending with s[i]</span></span><br><span class="line">            next.clear();</span><br><span class="line">            dp.push_back(i);    <span class="comment">// to take length-2 palindromic strings into account</span></span><br><span class="line">            next.push_back(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> idx : dp)&#123;</span><br><span class="line">                <span class="keyword">if</span>(idx &gt; <span class="number">0</span> &amp;&amp; s[idx<span class="number">-1</span>] == s[i])&#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    <span class="keyword">if</span>(idx<span class="number">-1</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                        next.push_back(idx<span class="number">-1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            dp = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/" data-id="ckbxuafy00000afxxfzwj7i9a" class="article-share-link">Share</a>
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/08/19/leetcode-647-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" data-id="cke0rnw8r00009jxxhy1i63m8" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%96%87%E4%B8%B2/" rel="tag">回文串</a></li></ul>
 
     </footer>
   </div>
@@ -131,19 +121,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/06/28/leetcode-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          leetcode 209. 长度最小的子数组
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/06/28/leetcode-5433-n-%E7%9A%84%E7%AC%AC-k-%E4%B8%AA%E5%9B%A0%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/08/18/leetcode-109-%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcode 5433. n 的第 k 个因子</div>
+      <div class="article-nav-title">leetcode 109. 有序链表转换二叉搜索树</div>
     </a>
   
 </nav>
