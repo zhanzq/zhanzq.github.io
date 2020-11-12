@@ -64,6 +64,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-5449-检查数组对是否可以被-k-整除" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/28/leetcode-5449-%E6%A3%80%E6%9F%A5%E6%95%B0%E7%BB%84%E5%AF%B9%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A2%AB-k-%E6%95%B4%E9%99%A4/" class="article-date">
+  <time datetime="2020-06-28T10:46:54.000Z" itemprop="datePublished">2020-06-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/28/leetcode-5449-%E6%A3%80%E6%9F%A5%E6%95%B0%E7%BB%84%E5%AF%B9%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A2%AB-k-%E6%95%B4%E9%99%A4/">leetcode 5449. 检查数组对是否可以被 k 整除</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个整数数组 <code>arr</code> 和一个整数 <code>k</code> ，其中数组长度是偶数，值为 <code>n</code> 。</p>
+<p>现在需要把数组恰好分成 <code>n / 2</code> 对，以使每对数字的和都能够被 <code>k</code> 整除。</p>
+<p>如果存在这样的分法，请返回 <em>True</em> ；否则，返回 <em>False</em> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [1,2,3,4,5,10,6,7,8,9], k &#x3D; 5</span><br><span class="line">输出：true</span><br><span class="line">解释：划分后的数字对为 (1,9),(2,8),(3,7),(4,6) 以及 (5,10) 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [1,2,3,4,5,6], k &#x3D; 7</span><br><span class="line">输出：true</span><br><span class="line">解释：划分后的数字对为 (1,6),(2,5) 以及 (3,4) 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [1,2,3,4,5,6], k &#x3D; 10</span><br><span class="line">输出：false</span><br><span class="line">解释：无法在将数组中的数字分为三对的同时满足每对数字和能够被 10 整除的条件。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [-10,10], k &#x3D; 2</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [-1,1,-2,2,-3,3,-4,4], k &#x3D; 3</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>arr.length == n</code></li>
+<li><code>1 &lt;= n &lt;= 10^5</code></li>
+<li><code>n</code> 为偶数</li>
+<li><code>-10^9 &lt;= arr[i] &lt;= 10^9</code></li>
+<li><code>1 &lt;= k &lt;= 10^5</code></li>
+</ul>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canArrange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">lst</span><span class="params">(k, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : arr)&#123;</span><br><span class="line">            v %= k;</span><br><span class="line">            v = (v + k)%k;</span><br><span class="line">            lst[v] = <span class="number">1</span> - lst[v];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>, j = k<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(lst[i] != lst[j])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i == j)&#123;</span><br><span class="line">            <span class="keyword">return</span> lst[i]%<span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5449-%E6%A3%80%E6%9F%A5%E6%95%B0%E7%BB%84%E5%AF%B9%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%A2%AB-k-%E6%95%B4%E9%99%A4/" data-id="ckbyykilg00011ixxcejh6jd6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-5448-判断路径是否相交" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/28/leetcode-5448-%E5%88%A4%E6%96%AD%E8%B7%AF%E5%BE%84%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4/" class="article-date">
@@ -183,70 +256,6 @@
 
 
   
-    <article id="post-leetcode-5432-去掉最低工资和最高工资后的工资平均值" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/" class="article-date">
-  <time datetime="2020-06-27T16:07:20.000Z" itemprop="datePublished">2020-06-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/">leetcode 5432. 去掉最低工资和最高工资后的工资平均值</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给你一个整数数组 <code>salary</code> ，数组里每个数都是 <strong>唯一</strong> 的，其中 <code>salary[i]</code> 是第 <code>i</code> 个员工的工资。</p>
-<p>请你返回去掉最低工资和最高工资以后，剩下员工工资的平均值。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [4000,3000,1000,2000]</span><br><span class="line">输出：2500.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 4000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000+3000)&#x2F;2&#x3D; 2500</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [1000,2000,3000]</span><br><span class="line">输出：2000.00000</span><br><span class="line">解释：最低工资和最高工资分别是 1000 和 3000 。</span><br><span class="line">去掉最低工资和最高工资以后的平均工资是 (2000)&#x2F;1&#x3D; 2000</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [6000,5000,4000,3000,2000,1000]</span><br><span class="line">输出：3500.00000</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：salary &#x3D; [8000,9000,2000,3000,6000,1000]</span><br><span class="line">输出：4750.00000</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>3 &lt;= salary.length &lt;= 100</code></li>
-<li><code>10^3 &lt;= salary[i] &lt;= 10^6</code></li>
-<li><code>salary[i]</code> 是唯一的。</li>
-<li>与真实值误差在 <code>10^-5</code> 以内的结果都将视为正确答案。</li>
-</ul>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">average</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; salary)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minval = INT_MAX, maxval = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> n = salary.size();</span><br><span class="line">        <span class="keyword">int</span> sumval = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v : salary)&#123;</span><br><span class="line">            minval = min(v, minval);</span><br><span class="line">            maxval = max(v, maxval);</span><br><span class="line">            sumval += v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1.0</span> * (sumval - minval - maxval)/(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/28/leetcode-5432-%E5%8E%BB%E6%8E%89%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%92%8C%E6%9C%80%E9%AB%98%E5%B7%A5%E8%B5%84%E5%90%8E%E7%9A%84%E5%B7%A5%E8%B5%84%E5%B9%B3%E5%9D%87%E5%80%BC/" data-id="ckbxuafy00000afxxfzwj7i9a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -291,7 +300,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
     </div>
   </div>
 
@@ -302,6 +311,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/11/12/922-%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84-II/">922. 按奇偶排序数组 II</a>
+          </li>
         
           <li>
             <a href="/2020/09/20/leetcode-404-%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/">leetcode 404. 左叶子之和</a>
@@ -317,10 +330,6 @@
         
           <li>
             <a href="/2020/09/17/leetcode-1576-%E6%9B%BF%E6%8D%A2%E6%89%80%E6%9C%89%E7%9A%84%E9%97%AE%E5%8F%B7/">leetcode 1576. 替换所有的问号</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/14/leetcode-LCP-18-%E6%97%A9%E9%A4%90%E7%BB%84%E5%90%88/">leetcode LCP 18. 早餐组合</a>
           </li>
         
       </ul>

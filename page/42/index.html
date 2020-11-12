@@ -64,6 +64,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-826-安排工作以达到最大收益" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/14/leetcode-826-%E5%AE%89%E6%8E%92%E5%B7%A5%E4%BD%9C%E4%BB%A5%E8%BE%BE%E5%88%B0%E6%9C%80%E5%A4%A7%E6%94%B6%E7%9B%8A/" class="article-date">
+  <time datetime="2020-06-14T13:37:10.000Z" itemprop="datePublished">2020-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/14/leetcode-826-%E5%AE%89%E6%8E%92%E5%B7%A5%E4%BD%9C%E4%BB%A5%E8%BE%BE%E5%88%B0%E6%9C%80%E5%A4%A7%E6%94%B6%E7%9B%8A/">leetcode 826. 安排工作以达到最大收益</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>有一些工作：<code>difficulty[i]</code> 表示第<code>i</code>个工作的难度，<code>profit[i]</code>表示第<code>i</code>个工作的收益。</p>
+<p>现在我们有一些工人。<code>worker[i]</code>是第i个工人的能力，即该工人只能完成难度小于等于<code>worker[i]</code>的工作。</p>
+<p>每一个工人都最多只能安排一个工作，但是一个工作可以完成多次。</p>
+<p>举个例子，如果3个工人都尝试完成一份报酬为1的同样工作，那么总收益为 $3。如果一个工人不能完成任何工作，他的收益为 $0 。</p>
+<p>我们能得到的最大收益是多少？</p>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: difficulty &#x3D; [2,4,6,8,10], profit &#x3D; [10,20,30,40,50], worker &#x3D; [4,5,6,7]</span><br><span class="line">输出: 100 </span><br><span class="line">解释: 工人被分配的工作难度是 [4,4,6,6] ，分别获得 [20,20,30,30] 的收益。</span><br></pre></td></tr></table></figure>
+<p><strong>提示:</strong></p>
+<ul>
+<li>1 &lt;= difficulty.length = profit.length &lt;= 10000`</li>
+<li><code>1 &lt;= worker.length &lt;= 10000</code></li>
+<li><code>difficulty[i], profit[i], worker[i]</code>  的范围是 <code>[1, 10^5]</code></li>
+</ul>
+<hr>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> PR pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(PR a, PR b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a.first &gt; b.first)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a.first == b.first)&#123;</span><br><span class="line">            <span class="keyword">return</span> a.second &gt; b.second;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfitAssignment</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; difficulty, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; worker)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;PR&gt; lst;</span><br><span class="line">        <span class="keyword">int</span> sz = difficulty.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++)&#123;</span><br><span class="line">            lst.push_back(&#123;profit[i], difficulty[i]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(lst.begin(), lst.end(), cmp);</span><br><span class="line">        sort(worker.begin(), worker.end(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> wk : worker)&#123;</span><br><span class="line">            <span class="keyword">while</span>(idx &lt; sz &amp;&amp; wk &lt; lst[idx].second)&#123;</span><br><span class="line">                idx++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(idx &gt;= sz)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                res += lst[idx].first;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-826-%E5%AE%89%E6%8E%92%E5%B7%A5%E4%BD%9C%E4%BB%A5%E8%BE%BE%E5%88%B0%E6%9C%80%E5%A4%A7%E6%94%B6%E7%9B%8A/" data-id="ckbp8ekm4001zyixxbdtl6rqi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-799-香槟塔" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/14/leetcode-799-%E9%A6%99%E6%A7%9F%E5%A1%94/" class="article-date">
@@ -187,59 +244,6 @@
 
 
   
-    <article id="post-leetcode-397-整数替换" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/14/leetcode-397-%E6%95%B4%E6%95%B0%E6%9B%BF%E6%8D%A2/" class="article-date">
-  <time datetime="2020-06-13T16:57:45.000Z" itemprop="datePublished">2020-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/">算法编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/leetcode-397-%E6%95%B4%E6%95%B0%E6%9B%BF%E6%8D%A2/">leetcode 397. 整数替换</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>给定一个正整数 <em>n</em>，你可以做如下操作：</p>
-<ol>
-<li>如果 <em>n</em> 是偶数，则用 <code>n / 2</code>替换 <em>n</em>。</li>
-<li>如果 n 是奇数，则可以用 <code>n + 1</code>或<code>n - 1</code>替换 <em>n</em>。</li>
-</ol>
-<p><em>n</em> 变为 1 所需的最小替换次数是多少？</p>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: 8</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">    8 -&gt; 4 -&gt; 2 -&gt; 1</span><br></pre></td></tr></table></figure>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: 7</span><br><span class="line">输出: 4</span><br><span class="line">解释:</span><br><span class="line">    7 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1</span><br><span class="line">    或</span><br><span class="line">    7 -&gt; 6 -&gt; 3 -&gt; 2 -&gt; 1</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">integerReplacement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> delta = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(n != <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="comment">// cout&lt;&lt;n&lt;&lt;endl;</span></span><br><span class="line">                bit = <span class="number">0</span>;</span><br><span class="line">                delta = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(delta&amp;n)&#123;</span><br><span class="line">                    bit++;</span><br><span class="line">                    delta &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(bit == <span class="number">0</span>)&#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(delta &gt; n)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(bit == <span class="number">2</span>)&#123;</span><br><span class="line">                            <span class="keyword">return</span> res + <span class="number">2</span>;</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            <span class="comment">// bit &gt; 2</span></span><br><span class="line">                            <span class="keyword">return</span> res + <span class="number">1</span> + bit;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">if</span>(bit == <span class="number">1</span>)&#123;</span><br><span class="line">                            res += <span class="number">2</span>;</span><br><span class="line">                            n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            res += bit + <span class="number">1</span>;</span><br><span class="line">                            n &gt;&gt;= bit;</span><br><span class="line">                            n++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/zhanzq/zhanzq.github.io/2020/06/14/leetcode-397-%E6%95%B4%E6%95%B0%E6%9B%BF%E6%8D%A2/" data-id="ckbp8ekln0015yixx1ibaed9g" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97/" rel="tag">数字</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -284,7 +288,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
     </div>
   </div>
 
@@ -295,6 +299,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/11/12/922-%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84-II/">922. 按奇偶排序数组 II</a>
+          </li>
         
           <li>
             <a href="/2020/09/20/leetcode-404-%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/">leetcode 404. 左叶子之和</a>
@@ -310,10 +318,6 @@
         
           <li>
             <a href="/2020/09/17/leetcode-1576-%E6%9B%BF%E6%8D%A2%E6%89%80%E6%9C%89%E7%9A%84%E9%97%AE%E5%8F%B7/">leetcode 1576. 替换所有的问号</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/14/leetcode-LCP-18-%E6%97%A9%E9%A4%90%E7%BB%84%E5%90%88/">leetcode LCP 18. 早餐组合</a>
           </li>
         
       </ul>
